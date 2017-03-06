@@ -1,4 +1,4 @@
-import { fetchItems, fetchIdsByType, fetchUser } from './fetch'
+import { fetchItems, fetchIdsByType, fetchUser, fetchAccount ,fetchInvest} from './fetch'
 
 const LOAD_MORE_STEP = 10
 
@@ -36,3 +36,18 @@ export function FETCH_USER ({ commit, state }, { id }) {
     ? Promise.resolve(state.users[id])
     : fetchUser(id).then(user => commit('SET_USER', { user }))
 }
+
+
+//添加
+//
+// export function FETCH_ACCOUNT({commit, dispatch, state},{}) {
+//     return fetchAccount()
+//         .then( account => commit("SET_ACCOUNT",{ account }))
+//         // .then(() => dispatch(''))
+// }
+//
+// export function FETCH_INVESTLIST({commit, dispatch, state},{}) {
+//     return fetchInvest()
+//         .then( invests => commit("SET_INVESTLIST",{ invests }))
+//         // .then(() => dispatch(''))
+// }

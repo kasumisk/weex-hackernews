@@ -1,0 +1,195 @@
+<template>
+    <div class="container">
+        <scroller class="scroller" :style="{ width: '750px', height: deviceHeight }">
+            <div class="cell mt30">
+                <div class="section">
+                    <text class="title">头像</text>
+                    <image src="http://192.168.2.113:8080/dist/images/head_img_member.png" style="width:70px;height:70px;"></image>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section" v-if="info.userName">
+                    <text class="title">用户名</text>
+                    <text class="content">{{info.userName}}</text>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section" v-if="info.userId">
+                    <text class="title">用户ID</text>
+                    <text class="content">{{info.userId}}</text>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section" v-if="info.phone">
+                    <text class="title">手机号</text>
+                    <text class="content">{{info.phone}}</text>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section" v-if="info.realName">
+                    <text class="title">姓名</text>
+                    <text class="content">{{info.realName}}</text>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section" v-if="info.cardId">
+                    <text class="title">身份证号</text>
+                    <text class="content">{{info.cardId}}</text>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section" v-if="info.bankCardNum">
+                    <text class="title">银行卡</text>
+                    <text class="content">{{info.bankCardNum}}</text>
+                </div>
+            </div>
+            <div class="cell" style="margin-top:60px;">
+                <div class="section">
+                    <text class="title">指纹密码</text>
+                    <switch></switch>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section">
+                    <text class="title">手势密码</text>
+                    <switch checked="true"></switch>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="section">
+                    <text class="title">修改手势密码</text>
+                    <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" style="width:40px;height:40px;" resize="contain"></image>
+                </div>
+            </div>
+            <wxc-button class="button" type="primary" size="big" value="退出登录" @click.native="signup"></wxc-button>
+
+
+
+        </scroller>
+    </div>
+</template>
+
+<script>
+var storage = require('@weex-module/storage');
+var stream = require('@weex-module/stream');
+var util = require('./utils/util.js');
+module.exports = {
+    components: {
+        wxcButton: require('weex-vue-components/button.vue')
+    },
+
+    props: {
+        info: {
+            default: function () {
+                return {
+                    userName: '',
+                    userId: '',
+                    phone: '',
+                    realName: '',
+                    cardId: '',
+                    isRealNameAuth: '',
+                    bankCardNum: ''
+                };
+            }
+        },
+        deviceHeight: {
+            default: ''
+        }
+    },
+    init: function () {
+        // 页面初始化 options为页面跳转所带来的参数
+    },
+    created: function () {
+        this.getData();
+        this.deviceHeight = this.$getConfig().env.deviceHeight - 120;
+    },
+    ready: function () {},
+    methods: {
+        getData: function () {
+            var _this = this;
+            stream.fetch({
+                url: util.config.api + "myInfo",
+                method: util.config.method,
+                body: "",
+                type: 'json',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                }
+            }, function (res) {
+                var myinfo = {
+                    userName: '15818116064',
+                    userId: '10033566',
+                    phone: '1581***040',
+                    realName: '谢海基',
+                    cardId: '4507*******0035',
+                    isRealNameAuth: '1',
+                    bankCardNum: '62156545993324'
+                };
+
+                _this.info = myinfo;
+                console.log(_this.info);
+            });
+        }
+
+    }
+};</script>
+
+<style lang="css" scoped="">
+.container{
+    background-color: #f2f3f7;
+}
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+.text-left{
+    text-align: left;
+}
+.flex-row{
+    flex-direction: row;
+}
+.grev{
+    color: #888;
+}
+.mt30{
+    margin-top: 30px;
+}
+.cell{
+    background-color: #fff;
+    width: 750px;
+}
+.section{
+    align-items: center;
+    margin-left: 20px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e6e6e6;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-right: 20px;
+    padding-left: 20px;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.title{
+    font-size: 32px;
+}
+.content{
+    font-size: 30px;
+}
+.button{
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    background-color:#32c1d4;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 690px;
+    font-size: 40px;
+    border-radius: 10px;
+    border-width: 0;
+}
+
+</style>
