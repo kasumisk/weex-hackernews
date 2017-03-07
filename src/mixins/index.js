@@ -5,12 +5,13 @@ export default {
         this.$router.push(to)
       }
     },
-    getEnv(){
+    getdeviceHeight(){
         console.log(WXEnvironment.platform);
         if(WXEnvironment.platform === 'Web'){
-            // weex.config.env.deviceHeight = document.body.clientHeight;
+            console.log(document.body.offsetHeight);
+            return document.body.offsetHeight
         }
-        return weex.config.env
+        return weex.config.env.deviceHeight
 
     }
   }

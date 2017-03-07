@@ -9,12 +9,12 @@ export function fetch (path) {
       type: 'json'
     }, (response) => {
       if (response.status == 200) {
-          console.log(`${baseURL}/${path}.json`);
-          console.log(response.data);
-        resolve(response.data)
+          console.log(response);
+          setTimeout(function () {
+              resolve(response.data)
+          },2000)
       }
       else {
-          console.log("222");
         reject(response)
       }
     }, () => {})
@@ -40,11 +40,14 @@ export function fetchUser (id) {
 
 //发起请求
 
-
 export function fetchAccount() {
     return fetch(`investorAccount`)
 }
 
 export function fetchInvest() {
     return fetch(`investList`)
+}
+
+export function fetchprojects(){
+    return fetch(`projects`)
 }

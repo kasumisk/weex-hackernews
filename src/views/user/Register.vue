@@ -101,11 +101,13 @@
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: #ccc;
+  align-items: center;
 }
 .form-hd{
   width:30px;
   height: 36px;
   margin-right: 40px;
+
 }
 .form-bd{
   flex:1;
@@ -113,12 +115,10 @@
 .form-clear{
   width:32px;
   height:32px;
-  margin-top: 34px;
 }
 .form-icon {
   width: 30px;
   height: 36px;
-  margin-top: 32px;
 }
 
 .input-text{
@@ -175,7 +175,6 @@
   padding-bottom: 15px;
   text-align: center;
   border-radius: 10px;
-  margin-top: 20px;
 }
 .register{
   font-size: 36px;
@@ -206,42 +205,18 @@
 // var apis = require('./common/api');
 
 module.exports = {
-    props: {
-        switchOn: {
-            default: false
-        },
-        passwordType: {
-            default: 'password'
-        },
-        username: {
-            default: ''
-        },
-        password: {
-            default: ''
-        },
-        smscode: {
-            default: ''
-        },
-        inviter: {
-            default: ''
-        },
-        showLoading: {
-            default: false
-        },
-        ajaxLoading: {
-            default: false
-        },
-        getSmsText: {
-            default: '获取'
-        },
-        getSmsClass: {
-            default: true
-        },
-        nameStauts: {
-            default: false
-        },
-        regStatus: {
-            default: false
+    data(){
+        return {
+            switchOn:false,
+            passwordType:'password',
+            username:'',
+            password:'',
+            smscode:'',
+            inviter:'',
+            getSmsText:'',
+            getSmsClass:true,
+            nameStauts:false,
+            regStatus:false
         }
     },
     created: function () {},

@@ -1,67 +1,35 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
+import * as getters from './getters'
 import * as mutations from './mutations'
+import invests from './modules/invests.js'
+import projects from './modules/projects.js'
+import user from './modules/user.js'
+// import createLogger from '../plugins/logger'
+
 
 // Vuex is auto installed on the web
 if (WXEnvironment.platform !== 'Web') {
     Vue.use(Vuex)
 }
 
+const debug = process.env.NODE_ENV !== 'production'
+
 const store = new Vuex.Store({
-    actions,
-    mutations,
-
-    state: {
-        activeType: null,
-        user:{
-            account: {},
-            invests:[],
-            repackets:[]
-        },
-        login: false,
-        items: {},
-        users: {},
-        counts: {
-            top: 20,
-            new: 20,
-            show: 15,
-            ask: 15,
-            job: 15
-        },
-        lists: {
-            projects: [],
-            repackets: [],
-            show: [],
-            ask: [],
-            job: []
-        }
-    },
-
-    getters: {
-        // ids of the items that should be currently displayed based on
-        // current list type and current pagination
-        activeIds(state) {
-            const {activeType, lists, counts} = state
-            return activeType
-                ? lists[activeType].slice(0, counts[activeType])
-                : []
-        },
-
-        // items that should be currently displayed.
-        // this Array may not be fully fetched.
-        activeItems(state, getters) {
-            return getters.activeIds.map(id => state.items[id]).filter(_ => _)
-        },
-        account(state) {
-            return state.login
-                ? state.user.account
-                : {}
-        },
-        invests(state){
-            return state.user.invests
-        }
-    }
+  actions,
+  getters,
+  mutations,
+  state:{
+      
+  },
+  modules: {
+    user,
+    projects,
+    invests
+  },
+  // strict: debug,
+  // plugins: debug ? [createLogger()] : []
 })
 
 export default store

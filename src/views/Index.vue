@@ -1,48 +1,31 @@
 <template>
 <div class="container">
-    <image src="http://120.25.77.23:3131/mz/images/banner.png" resize="cover" class="banner"></image>
-    <image src="http://120.25.77.23:3131/mz/images/cunguan.png" resize="cover" class="sub-banner"></image>
-    <list class="list mt30">
-        <!-- <refresh  class = "refresh-view" display="{{refresh_display}}" onrefresh="onrefresh">
-                    <text if="{{(refresh_display==='hide')}}"> ↓ pull to refresh </text>
-                    <loading-indicator class="indicator"></loading-indicator>
-                </refresh> -->
-        <!-- <cell class="cell" loadmore="getData" v-for="lists" :index="$index">
-                   <a :href="'/pages/detail/detail?projectId=' + (projectId)" class="item">
-                       <div class="item-hd flex flex-center">
-                           <text class="type">{{projectType}}</text>
-                           <text class="name">{{projectName}}</text>
-                       </div>
-                       <div class="item-bd flex flex-between flex-center">
-                           <div class="c-orange">
-                               <text class="num">{{rate}}</text>
-                               <text class="percent">%</text>
-                               <text class="plus" v-if="addRate">+</text>
-                               <text class="num" v-if="addRate">1</text>
-                               <text class="percent" v-if="addRate">%</text>
-                           </div>
-                           <div>
-                               <text class="term">{{term}}</text>
-                               <text class="term-name">{{termName}}</text>
-                           </div>
-                           <div>
-                               <div class="progress c-blue">
-                                   <div class="pro1" style="{{style1}}"></div>
-                                   <div class="pro2" style="{{style2}}"></div>
-                                   <div class="pro-num">{{progress}}</div>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="item-ft flex flex-between">
-                           <text>{{minAmount}}元起投</text>
-                           <text>剩余{{surplusAmount}}/{{totalAmount}}</text>
-                       </div>
-                   </a>
-               </cell> -->
-        <!-- <loading class="loading-view" display="{{loading_display}}" onloading="onloading">
-                    <text if="{{(loading_display==='hide')}}">↑ Loadmore </text>
-                    <loading-indicator class="indicator"></loading-indicator>
-               </loading> -->
+    <image src="http://120.25.77.23:3131/mz/images/banner.png" resize="cover" class="banner" style="width:750px; height:200px;"></image>
+    <image src="http://120.25.77.23:3131/mz/images/cunguan.png" resize="cover" class="sub-banner" style="width:750px; height:220px;"></image>
+    <list class="list mt30" @loadmore="loadMoreinvests" loadmoreoffset="80">
+        <!-- <refresh class="refresh-view" :display="refresh_display" @refresh="fetchInvest">
+            <text v-if="(refresh_display==='hide')">↓ pull to refresh</text>
+            <loading-indicator class="indicator"></loading-indicator>
+        </refresh> -->
+        <cell class="cell" v-for="item in projects_list.list" :key="item.id" append="tree">
+            <div class="item">
+                 <div class="item-header flex-row">
+                    <text class="text"> row  {{item.id}}</text>
+                </div>
+                 <div class="item-body flex-row">
+
+                </div>
+                <div class="item-footer">
+                </div>
+            </div>
+        </cell>
+        <loading class="loading-view" :display="loading_display">
+             <text v-if="(loading_display==='hide')">↑ Loadmore</text>
+             <loading-indicator class="indicator"></loading-indicator>
+        </loading>
+        <!-- <div class="loading" v-if="loading">
+          <text class="loading-text">loading ...</text>
+        </div> -->
     </list>
     <AppTabBar></AppTabBar>
 </div>
@@ -50,26 +33,47 @@
 
 <script>
 import AppTabBar from '../components/app-tabbar.vue'
+import {mapGetters, mapActions} from 'vuex'
 
 module.exports = {
     components: {
         AppTabBar
     },
-    props: {
-        userName: {
-            default: ''
-        }
-    },
     data() {
         return {
-            loadin: true
+            loading:false,
+            refresh_display:'hide',
+            loading_display:'hide',
         }
     },
-    created() {
-        this.getEnv()
-
+    created:function () {
+        this.fetchprojects();
     },
+    computed: mapGetters({
+      projects_list: 'projects_list'
+    }),
     methods: {
+        fetchprojects() {
+            this.refresh_display = 'show'
+            if(!this.loading){
+                this.loading = true
+                this.$store.dispatch('FETCH_PROJECTS').then(() => {
+                    this.loading = false
+                    this.refresh_display = 'hide'
+                })
+            }
+        },
+        loadMoreinvests(){
+            console.log('loadmore');
+            this.loading_display = 'show'
+            if(!this.loading){
+                this.loading = true
+                this.$store.dispatch('LOAD_MORE_PROJECTS').then(() => {
+                  this.loading = false
+                  this.loading_display = 'hide'
+                })
+            }
+        }
 
     }
 };
@@ -103,61 +107,8 @@ module.exports = {
     flex-direction: row;
 }
 
-.flex-center {
-    align-items: center;
-}
-
-.type {
-    height: 36px;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 36px;
-    margin-right: 20px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    font-size: 24px;
-    color: #fff;
-    background-color: #32c1d4;
-}
-
-.name {
-    font-size: 28px;
-}
-
-.flex-between {
-    justify-content: space-between;
-}
-
-.c-orange {
-    color: #ff871f !important;
-}
-
-.num {
-    font-size: 50px;
-}
-
-.term {
-    font-size: 50px;
-}
-
-.percent {
-    margin-left: 4px;
-    font-size: 24px;
-}
-
-.term-name {
-    margin-left: 4px;
-    font-size: 24px;
-}
-
-.progress {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 14px;
-    text-align: center;
-    position: relative;
-    background-color: #e2e2e2;
-    border-radius: 50%;
+.text{
+    font-size: 30px;
+    color: #333;
 }
 </style>

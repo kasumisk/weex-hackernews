@@ -26,8 +26,8 @@
               <div class="tab-line" v-if="tab_cur == 2"></div>
           </div>
       </div>
-      <list class="list" @loadmore="loadMoreinvests" loadmoreoffset="50">
-          <!-- <refresh class="refresh-view" :display="refresh_display" @refresh="onrefresh">
+      <list class="list" @loadmore="loadMoreinvests" loadmoreoffset="80">
+          <!-- <refresh class="refresh-view" :display="refresh_display" @refresh="fetchInvest">
               <text v-if="(refresh_display==='hide')">↓ pull to refresh</text>
               <loading-indicator class="indicator"></loading-indicator>
           </refresh> -->
@@ -52,13 +52,13 @@
                   </div>
               </div>
           </cell>
-          <!-- <loading class="loading-view" :display="loading_display" @loading="onloading">
+          <loading class="loading-view" :display="loading_display">
                <text v-if="(loading_display==='hide')">↑ Loadmore</text>
                <loading-indicator class="indicator"></loading-indicator>
-          </loading> -->
-          <div class="loading" v-if="loading">
+          </loading>
+          <!-- <div class="loading" v-if="loading">
             <text class="loading-text">loading ...</text>
-          </div>
+          </div> -->
       </list>
   </div>
 </template>
@@ -76,7 +76,9 @@ module.exports = {
   },
   data(){
       return {
-          loading:false
+          loading:false,
+          refresh_display:'hide',
+          loading_display:'hide'
       }
   },
   created: function () {
@@ -88,21 +90,36 @@ module.exports = {
   }),
   methods: {
     tabChange: function (tab_cur) {
-      this.$store.dispatch('TAB_INVESTLIST',{
-          tab_cur:tab_cur
-      })
+        if(!this.loading){
+            this.loading = true
+            this.$store.dispatch('TAB_INVESTLIST',{
+                tab_cur:tab_cur
+            }).then(() =>{
+                this.loading = false;
+                this.loading_display = 'hide'
+            })
+        }
     },
     fetchInvest() {
-        this.loading = true
-        this.$store.dispatch('FETCH_INVESTLIST', {tab_cur:this.tab_cur}).then(() => {
-            this.loading = false
-        })
+        this.refresh_display = 'show'
+        if(!this.loading){
+            this.loading = true
+            this.$store.dispatch('FETCH_INVESTLIST', {tab_cur:this.tab_cur}).then(() => {
+                this.loading = false
+                this.refresh_display = 'hide'
+            })
+        }
     },
     loadMoreinvests(){
         console.log('loadmore');
-        this.$store.dispatch('LOAD_MORE_INVESTLIST',{tab_cur:this.tab_cur}).then(() => {
-          this.loading = false
-        })
+        this.loading_display = 'show'
+        if(!this.loading){
+            this.loading = true
+            this.$store.dispatch('LOAD_MORE_INVESTLIST',{tab_cur:this.tab_cur}).then(() => {
+              this.loading = false
+              this.loading_display = 'hide'
+            })
+        }
     }
   }
 };
@@ -211,11 +228,11 @@ module.exports = {
    color: #889967;
  }
 
- .indicator {
+ /*.indicator {
     height: 40;
     width: 40;
     color:#45b5f0;
-  }
+  }*/
 
   .refresh-arrow {
     font-size: 30px;

@@ -52,6 +52,7 @@
         //   this.configEnv.deviceHeight -= 96;
         //   console.log(weex.config.env);
         //   console.log(this.getEnv());
+        this.deviceHeight = this.getdeviceHeight() - 100;
           this.configEnv = this.$getConfig().env
         //   this.deviceHeight = this.$getConfig().env.deviceHeight - 96;
         //   console.log(this.deviceHeight);

@@ -38,16 +38,16 @@ export function FETCH_USER ({ commit, state }, { id }) {
 }
 
 
-//添加
-//
-// export function FETCH_ACCOUNT({commit, dispatch, state},{}) {
-//     return fetchAccount()
-//         .then( account => commit("SET_ACCOUNT",{ account }))
-//         // .then(() => dispatch(''))
-// }
-//
-// export function FETCH_INVESTLIST({commit, dispatch, state},{}) {
-//     return fetchInvest()
-//         .then( invests => commit("SET_INVESTLIST",{ invests }))
-//         // .then(() => dispatch(''))
-// }
+// 添加
+
+export function FETCH_ACCOUNT({commit, dispatch, state},{}) {
+    return fetchAccount()
+        .then( account => commit("SET_ACCOUNT",{ account }))
+        // .then(() => dispatch(''))
+}
+
+export function FETCH_INVESTLIST({commit, dispatch, state},{}) {
+    return fetchInvest()
+        .then( invests => commit("SET_INVESTLIST",{ invests }))
+        // .then(() => dispatch(''))
+}

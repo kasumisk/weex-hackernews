@@ -17,14 +17,14 @@ export function SET_ITEMS (state, { items }) {
 export function SET_USER (state, { user }) {
   Vue.set(state.users, user.id, user)
 }
-// 
-// //账户
-// export function SET_ACCOUNT(state , { account }) {
-//     state.user.account = account
-//     state.login = true
-// }
-//
-// //项目投资
-// export function SET_INVESTLIST(state , { invests}) {
-//     state.user.invests = invests
-// }
+
+//账户
+export function SET_ACCOUNT(state , { account }) {
+    state.user.account = account
+    state.login = true
+}
+
+//项目投资
+export function SET_INVESTLIST(state , { invests}) {
+    state.user.invests = invests
+}

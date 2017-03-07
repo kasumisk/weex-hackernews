@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px; min-height:1000px;"></image>
+    <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px;height:1000px;"></image>
     <div class="bg-inner">
         <div class="justify-center">
           <image class="logo" src="http://app1.mindai.com/images/logo.png"></image>
@@ -217,7 +217,6 @@ module.exports = {
 
     },
     methods: {
-        created: function (e) {},
         login: function (e) {
 
             var _this = this;
