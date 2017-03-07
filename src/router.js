@@ -10,14 +10,17 @@ import IndexView from './views/Index.vue'
 import AccountView from './views/Account.vue'
 import MoreView from './views/More.vue'
 //account
-// import CachView from './views/account/Cash.vue'
+import CachView from './views/account/Cash.vue'
+import RechargeView from './views/account/Recharge.vue'
 import InvestView from './views/account/Invest.vue'
-// import RechargeView from './views/account/Recharge.vue'
 // import RedpacketView from './views/account/Redpacket.vue'
 //user
 // import UserRegisterView from './views/user/Register.vue'
 // import UserLoginView from './views/user/Login.vue'
 // import UserInfoView from './views/user/Info.vue'
+// depositary
+import depositaryRegView from './views/depositary/Register.vue'
+
 Vue.use(Router)
 
 // Story view factory
@@ -26,6 +29,14 @@ function createStoriesView (type) {
     name: `${type}-stories-view`,
     render (createElement) {
       return createElement(StoriesView, { props: { type }})
+    }
+  }
+}
+function createInvestView (type) {
+  return {
+    name: `${type}-stories-view`,
+    render (createElement) {
+      return createElement(InvestView, { props: { type }})
     }
   }
 }
@@ -41,19 +52,23 @@ export default new Router({
     { path: '/article/:url(.*)?', component: ArticleView },
     { path: '/item/:id(\\d+)', component: CommentView },
     { path: '/users/:id', component: UserView },
-    // { path: '/', redirect: '/account' },
+    // { path: '/', redirect: '/depositary/register' },
     // tabbar
     { path: '/', component: IndexView },
     { path: '/more', component: MoreView },
     { path: '/account', component: AccountView },
     // account
-    // { path: '/cach', component: CachView },
-    // { path: '/recharge', component: RechargeView },
-    { path: '/invest', component: InvestView },
+    { path: '/cach', component: CachView },
+    { path: '/recharge', component: RechargeView },
+    { path: '/invest/0', component: createInvestView("all") },
+    { path: '/invest/1', component: createInvestView("none") },
+    { path: '/invest/2', component: createInvestView("done") },
     // { path: '/redpacket', component: RedpacketView },
     // user
     // { path: '/user/register', component: UserRegisterView },
     // { path: '/user/login', component: UserLoginView },
     // { path: '/user/info', component: AccountView },
+    // depositary
+    { path: '/depositary/register', component: depositaryRegView },
   ]
 })

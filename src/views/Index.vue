@@ -1,7 +1,12 @@
 <template>
 <div class="container">
-    <image src="http://120.25.77.23:3131/mz/images/banner.png" resize="cover" class="banner" style="width:750px; height:200px;"></image>
-    <image src="http://120.25.77.23:3131/mz/images/cunguan.png" resize="cover" class="sub-banner" style="width:750px; height:220px;"></image>
+    <div class="header">
+        <image src="http://120.25.77.23:3131/mz/images/banner.png" resize="cover" class="banner" style="width:750px; height:200px;"></image>
+        <image src="http://120.25.77.23:3131/mz/images/cunguan.png" resize="cover" class="sub-banner" style="width:750px; height:220px;"></image>
+    </div>
+    <div class="body">
+        <text class="text">{{deviceHeight}}</text>
+    </div>
     <list class="list mt30" @loadmore="loadMoreinvests" loadmoreoffset="80">
         <!-- <refresh class="refresh-view" :display="refresh_display" @refresh="fetchInvest">
             <text v-if="(refresh_display==='hide')">↓ pull to refresh</text>
@@ -44,9 +49,12 @@ module.exports = {
             loading:false,
             refresh_display:'hide',
             loading_display:'hide',
+            deviceHeight:0
         }
     },
     created:function () {
+        console.log(weex.config.env);
+        this.deviceHeight = weex.config.env.deviceHeight;
         this.fetchprojects();
     },
     computed: mapGetters({

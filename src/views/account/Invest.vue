@@ -14,16 +14,16 @@
       </div>
       <div class="tab border-top flex-row">
           <div class="flex-1">
-              <text class="tab-nav" @click="tabChange('0')">全部</text>
-              <div class="tab-line" v-if="tab_cur == 0"></div>
+              <text class="tab-nav" @click="jump('/invest/0')">全部</text>
+              <div class="tab-line" v-if="type == 'all'"></div>
           </div>
           <div class="flex-1">
-              <text class="tab-nav" @click="tabChange('1')">未还完</text>
-              <div class="tab-line" v-if="tab_cur == 1"></div>
+              <text class="tab-nav" @click="jump('/invest/1')">未还完</text>
+              <div class="tab-line" v-if="type == 'none'"></div>
           </div>
           <div class="flex-1" >
-              <text class="tab-nav" @click="tabChange('2')">已还完</text>
-              <div class="tab-line" v-if="tab_cur == 2"></div>
+              <text class="tab-nav" @click="jump('/invest/2')">已还完</text>
+              <div class="tab-line" v-if="type == 'done'"></div>
           </div>
       </div>
       <list class="list" @loadmore="loadMoreinvests" loadmoreoffset="80">
@@ -67,13 +67,13 @@
 import {mapGetters, mapActions} from 'vuex'
 
 module.exports = {
-  props: {
-    resData: {
-      default: function () {
-        return {};
+    props: {
+      type: {
+        type: String,
+        required: true,
+        default: 'all'
       }
     },
-  },
   data(){
       return {
           loading:false,

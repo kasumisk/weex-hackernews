@@ -18,17 +18,19 @@
         </div>
         <div class="padding white-bg mt30 flex-row" style="align-items:center;">
             <text style="width:140px;">提现金额</text>
-            <input class="input flex-1" type="text" name="" :value="money" placeholder="请输入提现金额">
+            <input class="input flex-1" type="text" name="" :value="money" placeholder="请输入提现金额"/>
         </div>
         <text class="sub-text">本次提现手续费：0.00元</text>
-        <div class="button" type="primary" size="big" value="确认提现" @click.native="signup"></div>
+        <div class="button" @click.native="signup">
+            <text class="button-text">确认提现</text>
+        </div>
         <div class="mt30">
             <text class="main-text">温馨提示：</text>
             <text class="main-text">1、当日充值的资金不可提现，充值成功后，待T+1工作日充值清算后可提。</text>
             <text class="main-text">2、提现返回结果显示提现成功仅表示提现交易已成功受理，资金入账时间以实际处理时间为准。</text>
         </div>
 
-        <div class="topup-pop" v-if="modal">
+        <!-- <div class="topup-pop" v-if="modal">
             <div class="mask"></div>
             <div class="dialog">
                 <div class="dialog-hd">
@@ -44,7 +46,7 @@
                     </div>
                     <div class="form-get-code">
                         <div class="input-code">
-                            <input ref="topupSms" type="number" pattern="[0-9]*" maxlength="6" class="" bindinput="smsCodeInput" :value="smsCode">
+                            <input ref="topupSms" type="number" pattern="[0-9]*" maxlength="6" class="" bindinput="smsCodeInput" :value="smsCode"/>
                         </div>
                         <div ref="smsBtn" :class="['btn', 'btn-blue', smsClass]" bindtap="getCode">
                             {{smsCodeText}}
@@ -57,7 +59,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </template>
@@ -69,30 +71,28 @@ module.exports = {
     components: {
         // wxcButton: require('weex-vue-components/button.vue')
     },
-
-    props: {
-        info: {
-            default: function () {
-                return {
-                    userName: '',
-                    userId: '',
-                    phone: '',
-                    realName: '',
-                    cardId: '',
-                    money: '',
-                    isRealNameAuth: '',
-                    bankCardNum: '',
-                    modal: false,
-                    imgWidth: '0'
-                };
-            }
-        },
-        bankLogo: {
-            default: 'http://192.168.2.113:8080/dist/images/bank/bankLogo_01.png'
+    data(){
+        return {
+            userInfo:{
+                userName: '',
+                userId: '',
+                phone: '',
+                realName: '',
+                cardId: '',
+                money: '',
+                isRealNameAuth: '',
+                bankCardNum: '',
+                modal: false,
+                imgWidth: '0'
+            },
+            money:'',
+            modal:false,
+            bankLogo:'http://192.168.2.113:8080/dist/images/bank/bankLogo_01.png'
         }
     },
-    created: function () {},
-    ready: function () {},
+    created: function () {
+        
+    },
     methods: {
         imgLoad: function (e) {
             // console.log(e);
@@ -175,6 +175,12 @@ module.exports = {
     font-size: 40px;
     border-radius: 10px;
     border-width: 0;
+}
+.button-text{
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
 }
 .sub-text{
     font-size: 24px;

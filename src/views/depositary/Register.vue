@@ -6,15 +6,15 @@
             </div>
             <div class="cell">
                 <image class="icon" src="http://192.168.2.113:8080/dist/images/openIcon1.png" resize="contain"></image>
-                <input class="input flex-1" type="text" name="" :value="realName" placeholder="请输入真实姓名">
+                <input class="input flex-1" type="text" name="" :value="realName" placeholder="请输入真实姓名"/>
             </div>
             <div class="cell">
                 <image class="icon" src="http://192.168.2.113:8080/dist/images/openIcon2.png" resize="contain"></image>
-                <input class="input flex-1" type="text" name="" :value="cardId" placeholder="请输入身份证号">
+                <input class="input flex-1" type="text" name="" :value="cardId" placeholder="请输入身份证号"/>
             </div>
             <div class="cell mt30">
                 <image class="icon" src="http://192.168.2.113:8080/dist/images/openIcon5.png" resize="contain"></image>
-                <input class="input flex-1" type="text" name="" :value="bankCardNum" placeholder="请输入银行卡号">
+                <input class="input flex-1" type="text" name="" :value="bankCardNum" placeholder="请输入银行卡号"/>
             </div>
             <div class="cell flex-row" style="background-color:transparent;">
                 <div class="flex-1 flex-row" @click="province">
@@ -27,29 +27,28 @@
             </div>
             <div class="cell">
                 <image class="icon" src="http://192.168.2.113:8080/dist/images/openIcon6.png" resize="contain"></image>
-                <input class="input flex-1" type="text" name="" :value="bankPhone" placeholder="请输入银行卡预留手机号">
+                <input class="input flex-1" type="text" name="" :value="bankPhone" placeholder="请输入银行卡预留手机号"/>
             </div>
             <div class="cell">
                 <image class="icon" src="http://192.168.2.113:8080/dist/images/openIcon7.png" resize="contain"></image>
-                <input class="input flex-1" type="text" name="" :value="smsCode" placeholder="请输入短信验证码">
-                <wxc-button class="getSmsCode" type="primary" size="big" value="获取验证码" @click.native="signup"></wxc-button>
+                <input class="input flex-1" type="text" name="" :value="smsCode" placeholder="请输入短信验证码"/>
+                <div class="getSmsCode" @click.native="signup">
+                    <text class="smsCode-text">获取验证码</text>
+                </div>
             </div>
-            <wxc-button class="button" type="primary" size="big" value="开通存管账户" @click.native="signup"></wxc-button>
+            <div class="button" @click.native="signup">
+                <text class="button-text">开通存管账户</text>
+            </div>
             <text style="color:#888;font-size:24px; margin-top:20px; margin-right:30px; margin-left:30px;">温馨提示：请填写您的个人真实信息，存管账户开通后将无法修改。</text>
         </scroller>
     </div>
 </template>
 
 <script>
-var storage = require('@weex-module/storage');
-var stream = require('@weex-module/stream');
-var util = require('./utils/util.js');
-var picker = require('@weex-module/picker');
-module.exports = {
-    components: {
-        wxcButton: require('weex-vue-components/button.vue')
-    },
 
+// var util = require('./utils/util.js');
+var picker = weex.requireModule('picker');
+module.exports = {
     props: {
         userInfo: {
             default: function () {
@@ -178,12 +177,18 @@ module.exports = {
 }
 .getSmsCode{
     width:200px;
-    height: 60px;
     border-radius: 6px;
     background-color:#32c1d4;
     border-width: 0;
 }
-
+.smsCode-text{
+    color: #fff;
+    font-size: 28px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-weight: bold;
+    text-align: center;
+}
 .button{
     margin-top: 30px;
     margin-left: 30px;
@@ -195,5 +200,12 @@ module.exports = {
     font-size: 40px;
     border-radius: 10px;
     border-width: 0;
+}
+
+.button-text{
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
 }
 </style>

@@ -7,7 +7,7 @@
         </a>
     </div> -->
     <div class="login">
-        <scroller class="scroller" :style="{ width: '750px', height: deviceHeight }">
+        <scroller class="scroller" :style="{ width: '750px', height: deviceHeight + 'px' }">
             <div class="cells cell-user bgc-white">
                 <a class="cell-access flex flex-center" url="/pages/user/my-info">
                     <div class="cell-hd" style="margin-right:20px;">
@@ -31,7 +31,7 @@
                     <div class="depository-no" v-if="account.isDepository == 0">
                         <text style="font-size:50px;font-weight:bold;">开通存管账户</text>
                         <text style="padding-top:30px;padding-bottom:40px;font-size:40px;">投资及账户资金更安全</text>
-                        <a href="/pages/depositary/register" class="btn"><text style="color:#32c1d4; text-align:center;">我要开通</text></a>
+                        <div @click="jump('/depositary/register')" class="btn"><text style="color:#32c1d4; text-align:center;">我要开通</text></div>
                     </div>
                     <div class="depository-yes" v-if="account.isDepository != 0">
                         <div class="zs-card-num flex-row">
@@ -66,7 +66,7 @@
             </div>
 
             <div class="cells cell-main cells-hasIcon mt30 bgc-white">
-                <div class="cell-access flex flex-center" @click="jump('/invest')" style="border-bottom-width:2px; border-bottom-style:solid;border-bottom-color:#e6e6e6;">
+                <div class="cell-access flex flex-center" @click="jump('/invest/0')" style="border-bottom-width:2px; border-bottom-style:solid;border-bottom-color:#e6e6e6;">
                     <div class="cell-hd">
                         <image class="cell-icon icon-rmb" src="http://192.168.2.113:8080/dist/images/icon-rmb.png" style="width:34px;height:42px;"></image>
                     </div>
@@ -131,7 +131,9 @@
                     </div>
                 </div>
             </div>
-            <div class="safety">交易与账户安全由中国人民保险公司全程担保</div>
+            <div class="flex-row">
+                <text class="safety">交易与账户安全由中国人民保险公司全程担保</text>
+            </div>
         </scroller>
     </div>
     <AppTabBar></AppTabBar>
@@ -153,20 +155,15 @@ import AppTabBar from '../components/app-tabbar.vue'
         account: {
             default: function() {
                 return {
-                    isDepository: '0'
+                    isDepository: 0
                 };
             }
-        },
-        // login: {
-        //     default: false
-        // },
-        deviceHeight: {
-            default: 500
         }
     },
     data() {
         return {
-            loading: false
+            loading: false,
+            default: 0
         }
     },
     computed: {
@@ -177,13 +174,8 @@ import AppTabBar from '../components/app-tabbar.vue'
 
     created() {
         // this.login = true;
-        // console.log(this.$store.state.login);
-        this.$getConfig(function (config) {
-         this.configEnv = config.env
-       }.bind(this));
+        this.deviceHeight = weex.config.env.deviceHeight - 228;
         this.fetchAccount();
-        // console.log(this.$getConfig().env.deviceHeight);
-        // this.deviceHeight = this.$getConfig().env.deviceHeight - 120;
     },
     methods: {
         fetchAccount() {
@@ -314,6 +306,13 @@ import AppTabBar from '../components/app-tabbar.vue'
   font-size:24px;
   color: #aaa;
 }
-
+.safety{
+    width: 750px;
+    color: #888;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 12px;
+    margin-top: 30px;
+}
 
 </style>

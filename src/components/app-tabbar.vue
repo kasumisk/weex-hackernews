@@ -1,5 +1,5 @@
 <template>
-<div class="tabbar" :style="{}">
+<div class="tabbar" :style="{top:deviceHeight + 'px'}">
     <div class="nav">
         <div class="nav-container">
             <div class="link" @click="jump('/')">
@@ -39,30 +39,32 @@
           deviceHeight:0
         }
       },
-
+      created () {
+          this.deviceHeight = weex.config.env.deviceHeight - 228;
+        //   this.configEnv = weex.config.env;
+        //   this.configEnv.deviceHeight -= 96;
+        //   console.log(weex.config.env);
+        //   console.log(this.getEnv());
+        // this.deviceHeight = this.getdeviceHeight() - 100;
+        //   this.configEnv = this.$getConfig().env
+        //   this.deviceHeight = this.$getConfig().env.deviceHeight - 96;
+        //   console.log(this.deviceHeight);
+      },
       computed: {
 
       },
 
       methods: {
 
-      },
-      created () {
-        //   this.configEnv = weex.config.env;
-        //   this.configEnv.deviceHeight -= 96;
-        //   console.log(weex.config.env);
-        //   console.log(this.getEnv());
-        this.deviceHeight = this.getdeviceHeight() - 100;
-          this.configEnv = this.$getConfig().env
-        //   this.deviceHeight = this.$getConfig().env.deviceHeight - 96;
-        //   console.log(this.deviceHeight);
       }
+
     }
 
 </script>
 
 <style scoped>
 .tabbar {
+    position: absolute;
     width:750px;
     height: 96px;
     border-top-width: 2px;
