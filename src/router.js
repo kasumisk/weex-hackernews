@@ -15,11 +15,13 @@ import RechargeView from './views/account/Recharge.vue'
 import InvestView from './views/account/Invest.vue'
 // import RedpacketView from './views/account/Redpacket.vue'
 //user
-// import UserRegisterView from './views/user/Register.vue'
-// import UserLoginView from './views/user/Login.vue'
+import UserRegisterView from './views/user/Register.vue'
+import UserLoginView from './views/user/Login.vue'
 // import UserInfoView from './views/user/Info.vue'
 // depositary
 import depositaryRegView from './views/depositary/Register.vue'
+
+import webView from './views/web.vue'
 
 Vue.use(Router)
 
@@ -52,11 +54,12 @@ export default new Router({
     { path: '/article/:url(.*)?', component: ArticleView },
     { path: '/item/:id(\\d+)', component: CommentView },
     { path: '/users/:id', component: UserView },
-    // { path: '/', redirect: '/depositary/register' },
+    // { path: '/', redirect: '/more' },
     // tabbar
     { path: '/', component: IndexView },
     { path: '/more', component: MoreView },
     { path: '/account', component: AccountView },
+    { path: '/web/:url(.*)?', component: webView },
     // account
     { path: '/cach', component: CachView },
     { path: '/recharge', component: RechargeView },
@@ -65,8 +68,8 @@ export default new Router({
     { path: '/invest/2', component: createInvestView("done") },
     // { path: '/redpacket', component: RedpacketView },
     // user
-    // { path: '/user/register', component: UserRegisterView },
-    // { path: '/user/login', component: UserLoginView },
+    { path: '/user/register', component: UserRegisterView },
+    { path: '/user/login', component: UserLoginView },
     // { path: '/user/info', component: AccountView },
     // depositary
     { path: '/depositary/register', component: depositaryRegView },

@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px; min-height:1000px;resize:both;"></image>
+      <!-- 图片使用变量 -->
+    <image :src="url + 'images/login-bg.png'" alt="" style="width:750px; height:853px;" resize= "cover"></image>
+    <!-- <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px; height:853px;" resize= "cover"></image> -->
     <div class="bg-inner">
         <div class="justify-center">
           <image class="logo" src="http://app1.mindai.com/images/logo.png"></image>
@@ -11,7 +13,7 @@
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_01.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input ref="userName" class="input-text" type="text" :value="userName" placeholder="手机号/用户名" maxlength="20" @input="listenerUserName">
+                  <input ref="userName" class="input-text" type="text" :value="userName" placeholder="手机号/用户名" maxlength="20" @input="listenerUserName"/>
               </div>
               <div class="form-ft">
                   <image src="http://app1.mindai.com/images/x-29.png" :class="[userName==''?'':'form-clear', 'ng-hide']" @click="clearUserName"></image>
@@ -22,7 +24,7 @@
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_02.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input class="input-text" :type="passwordType" :value="password" placeholder="请输入密码" maxlength="20" @input="listenerPassword">
+                  <input class="input-text" :type="passwordType" :value="password" placeholder="请输入密码" maxlength="20" @input="listenerPassword"/>
               </div>
               <div class="form-ft">
                   <div style="flex-direction:row;">
@@ -39,7 +41,7 @@
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_03.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input class="input-text" type="text" :value="userName" placeholder="请输入验证码" maxlength="20" @input="listenerUserName">
+                  <input class="input-text" type="text" :value="userName" placeholder="请输入验证码" maxlength="20" @input="listenerUserName"/>
               </div>
               <div class="form-ft">
                   <text class="get-sms-code">{{getSmsText}}</text>
@@ -50,7 +52,7 @@
             <div class="form" style="border-bottom-width:0;">
               <div class="form-hd"><image src="http://192.168.2.113:8080/dist/images/icons-1_04.png" class="icon form-icon"></image></div>
               <div class="form-bd">
-                <input class="input-text" type="text" placeholder="推荐人用户名/手机号（选填）" maxlength="20" bindinput="listenerInviter" :value="inviter" ng-enter="">
+                <input class="input-text" type="text" placeholder="推荐人用户名/手机号（选填）" maxlength="20" bindinput="listenerInviter" :value="inviter" ng-enter=""/>
               </div>
               <div class="form-ft"><div ref="inviterClear" data-clear="inviter" bindtap="clear" :class="[inviter==''?'':'form-clear', 'ng-hide']"></div></div>
             </div>
@@ -62,6 +64,41 @@
   </div>
 
 </template>
+
+
+<script>
+// var apis = require('./common/api');
+
+module.exports = {
+    data(){
+        return {
+            switchOn:false,
+            passwordType:'password',
+            username:'',
+            password:'',
+            smscode:'',
+            inviter:'',
+            getSmsText:'获取',
+            getSmsClass:true,
+            nameStauts:false,
+            regStatus:false,
+            url:'http://app1.mindai.com/'
+        }
+    },
+    created: function () {
+
+
+    },
+    methods: {
+        created: function (e) {}
+    }
+};
+
+
+</script>
+
+
+
 
 <style scoped="" scoped="">
 
@@ -164,13 +201,12 @@
   background-color: #fff;
 }
 .get-sms-code{
-  font-size: 23px;
+  font-size: 24px;
   border-width: 1px;
   border-style: solid;
   border-color: #32c1d4;
   color: #32c1d4;
   width: 116px;
-  height: 60px;
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: center;
@@ -191,36 +227,11 @@
   border-radius: 10px;
 }
 .agreement{
-  margin-top: 30px;
   padding-top:30px;
   padding-bottom:30px;
-  font-size: 12px;
+  font-size: 24px;
   color: #aaa;
   text-align: center;
 }
 
 </style>
-
-<script>
-// var apis = require('./common/api');
-
-module.exports = {
-    data(){
-        return {
-            switchOn:false,
-            passwordType:'password',
-            username:'',
-            password:'',
-            smscode:'',
-            inviter:'',
-            getSmsText:'',
-            getSmsClass:true,
-            nameStauts:false,
-            regStatus:false
-        }
-    },
-    created: function () {},
-    methods: {
-        created: function (e) {}
-    }
-};</script>

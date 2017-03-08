@@ -25,3 +25,4 @@ android/playground/app/gradlew.bat
 android/playground/app/gradle/wrapper/gradle-wrapper.jar
 android/playground/app/gradle/wrapper/gradle-wrapper.properties
 src/views/test.vue
+src/test.html

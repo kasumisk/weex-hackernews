@@ -7,7 +7,7 @@
         </a>
     </div> -->
     <div class="login">
-        <scroller class="scroller" :style="{ width: '750px', height: deviceHeight + 'px' }">
+        <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }">
             <div class="cells cell-user bgc-white">
                 <a class="cell-access flex flex-center" url="/pages/user/my-info">
                     <div class="cell-hd" style="margin-right:20px;">
@@ -145,6 +145,10 @@
 // var storage = require('@weex-module/storage');
 // var stream = require('@weex-module/stream');
 // var util = require('../utils/util.js');
+ import {
+    mapGetters,
+    mapActions
+} from 'vuex'
 import AppTabBar from '../components/app-tabbar.vue'
 
   export default {
@@ -166,11 +170,16 @@ import AppTabBar from '../components/app-tabbar.vue'
             default: 0
         }
     },
-    computed: {
-        account() {
-            return this.$store.getters.account
-        }
-    },
+    // computed: {
+    //     account() {
+    //         return this.$store.getters.account
+    //     }
+    //
+    // },
+    computed: mapGetters({
+        account: 'account',
+        clientHeight:'clientHeight'
+    }),
 
     created() {
         // this.login = true;

@@ -27,9 +27,7 @@
 </template>
 
 <script>
-    import util from '../util/util.js'
-    console.log(util.config.resouce);
-
+    import config from '../util/config.js'
     export default {
       name: 'tabbar',
       data () {
@@ -39,8 +37,11 @@
           deviceHeight:0
         }
       },
+      init(){
+
+      },
       created () {
-          this.deviceHeight = weex.config.env.deviceHeight - 228;
+           this.deviceHeight = config.clientHeight;
         //   this.configEnv = weex.config.env;
         //   this.configEnv.deviceHeight -= 96;
         //   console.log(weex.config.env);

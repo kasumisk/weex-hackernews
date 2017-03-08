@@ -1,33 +1,33 @@
 <template>
   <div class="container">
-    <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px;height:1000px;"></image>
+    <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px;height:573px;" resize= "cover"></image>
     <div class="bg-inner">
         <div class="justify-center">
           <image class="logo" src="http://app1.mindai.com/images/logo.png"></image>
         </div>
         <div class="forms-mh30 forms-gray forms-radius">
-          <div class="form">
+          <div class="form" style="border-bottom-color:#ccc; border-bottom-style:solid; border-bottom-width:2px;">
               <div class="form-hd">
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_01.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input ref="userName" class="input-text" type="text" :value="userName" placeholder="手机号/用户名" maxlength="20" @input="listenerUserName">
+                  <input  class="input-text" type="text" value="" placeholder="手机号/用户名" maxlength="20" @input = "inputUserName"/>
               </div>
               <div class="form-ft">
-                  <image src="http://app1.mindai.com/images/x-29.png" :class="[userName==''?'':'form-clear', 'ng-hide']" @click="clearUserName"></image>
+                  <image src="http://app1.mindai.com/images/x-29.png" v-if="userName" @click="clear('userName')"></image>
               </div>
           </div>
-          <div class="form" style="border-top-width:2px; border-color:#ccc;border-bottom-style: solid;">
+          <div class="form">
               <div class="form-hd">
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_02.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input ref="password" class="input-text" :type="passwordType" :value="password" placeholder="请输入密码" maxlength="20" @input="listenerPassword">
+                  <input  class="input-text" :type="passwordType" value=""  placeholder="请输入密码" maxlength="20" @input = "inputPassWord"/>
               </div>
               <div class="form-ft">
                   <div style="flex-direction:row;">
-                    <image src="http://app1.mindai.com/images/x-29.png" :class="[password==''?'':'form-clear', 'ng-hide']" @click="clearPassword"></image>
-                    <div class="switch" @click="switch" :style="{ backgroundColor: switchOn!=false?'#32c1d4':'#ccc' }">
+                    <image src="http://app1.mindai.com/images/x-29.png" v-if="password" @click="clear('password')"></image>
+                    <div class="switch" @click="switchTab" :style="{ backgroundColor: switchOn!=false?'#32c1d4':'#ccc' }">
                         <div :class="['switch-handle', switchOn!=false?'switch-on':'switch-off']"></div>
                         <image :src="switchOn!=false?'http://192.168.2.113:8080/dist/images/switch-1_01.png':'http://192.168.2.113:8080/dist/images/switch-1_02.png'" class="switch-img"></image>
                     </div>
@@ -37,11 +37,69 @@
         </div>
         <text class="submit">登录</text>
         <a class="reg-link mt30" href="./register.js">
-          <text style="text-align:center;">没有账号？立即注册4</text>
+          <text style="text-align:center;">没有账号？立即注册</text>
         </a>
     </div>
   </div>
 </template>
+
+<script>
+
+module.exports = {
+    // props: {
+    //   userName: {
+    //     type: String,
+    //     required: true,
+    //     default: ''
+    //     },
+    //     userName: {
+    //       type: String,
+    //       required: true,
+    //       default: ''
+    //     }
+    // },
+    data(){
+        return{
+            userName:'',
+            password:'',
+            passwordType:'password',
+            switchOn:false
+        }
+    },
+    created: function () {
+        // 页面初始化 options为页面跳转所带来的参数
+
+    },
+    methods: {
+        login: function (e) {
+
+        },
+        clear(type){
+            if(type == 'userName'){
+                this.userName = ''
+            }else {
+                this.password = ''
+            }
+        },
+        switchTab: function () {
+            this.switchOn = !this.switchOn;
+            this.passwordType = this.passwordType == 'text' ? 'password' : 'text';
+        },
+        inputUserName(e){
+            this.userName = e.value;
+            console.log(this.userName);
+        },
+        inputPassWord(e){
+            this.password = e.value;
+
+        }
+    }
+};
+</script>
+
+
+
+
 
 <style scoped="" scoped="">
 .bg-inner{
@@ -80,6 +138,7 @@
   padding-right: 30px;
   height: 100px;
   flex-direction: row;
+  align-items: center;
 }
 .form-hd{
   width:30px;
@@ -92,21 +151,11 @@
 .form-clear{
   width:32px;
   height:32px;
-  margin-top: 34px;
-  background-image:url(http://app1.mindai.com/images/x-29.png);
-  background-position: 0/32px 32px;
-  background-repeat: no-repeat;
 }
 .form-icon {
   width: 30px;
   height: 36px;
-  margin-top: 32px;
-  background-position: 0 0/30px 160px;
-  background-repeat: no-repeat;
 }
-
-.icon-password {
-  background-position: 0 -40px; }
 
 .input-text{
   font-size: 28px;
@@ -125,11 +174,8 @@
   height: 36px;
   margin-top: 32px;
   margin-left: 20px;
-  padding: 4px;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.2) url(http://app1.mindai.com/images/switch-1.png) 0 0/68px 726px;
   background-color: #32c1d4;
-  background-position: 0 0;
 }
 .switch-img{
   position: absolute;
@@ -140,7 +186,6 @@
 }
 .switch-off {
   left: 4px;
-  background-position: 0 -36px;
 }
 
 .switch-on {
@@ -160,189 +205,14 @@
   font-size: 36px;
   color: #fff;
   background-color: #32c1d4;
-  line-height: 55px;
-  height: 80px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   margin-left: 60px;
   margin-right: 60px;
   margin-top: 30px;
-  text-align: center;
   margin-bottom: 30px;
+  text-align: center;
   border-radius: 10px;
 }
 
 </style>
-<script>
-// var apis = require('./common/api');
-var reg = {
-    //11位手机号码
-    phone: /^1[3|4|5|7|8][0-9]\d{8,8}$/,
-    //6~32位字符，支持英文、数字及英文符号的密码
-    password: /^[~`!@#\$%\^&\*\(\)_\-\+=\|\\\}\]\{\[:;<,>\.\?\/"'a-zA-Z0-9]{6,32}$/,
-    //登录用户名
-    userName: /[0-9A-Za-z_]{1,20}$/,
-    //包含中文
-    cn: /^[\u4e00-\u9fa5]$/,
-    //姓名
-    name: /^[\u4e00-\u9fa5]{2,4}$/,
-    //邮箱
-    email: /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
-};
-
-module.exports = {
-    props: {
-        userName: {
-            default: ''
-        },
-        password: {
-            default: ''
-        },
-        passwordType: {
-            default: 'password'
-        },
-        switchOn: {
-            default: false
-        },
-        ajaxLoading: {
-            default: false
-        },
-        projectId: {
-            default: ''
-        },
-        from: {
-            default: ''
-        }
-    },
-    created: function () {
-        // 页面初始化 options为页面跳转所带来的参数
-
-    },
-    methods: {
-        login: function (e) {
-
-            var _this = this;
-
-            if (!this.data.userName) {
-                // util.showToast({type: 'warn', hide: false, text: '请输入手机号'},_this)
-                return false;
-            } else if (!reg.userName.test(this.data.userName)) {
-                // util.showToast({type: 'warn', hide: false, text: '请输入正确的手机号或用户名'},_this)
-                return false;
-            } else if (!this.data.password) {
-                // util.showToast({type: 'warn', hide: false, text: '密码不能为空'},_this)
-                return false;
-            } else if (this.data.password.length < 6) {
-                // util.showToast({type: 'warn', hide: false, text: '密码不能小于6位'},_this)
-                return false;
-            } else if (this.data.password.length > 32) {
-                // util.showToast({type: 'warn', hide: false, text: '密码不能大于32位'},_this)
-                return false;
-            } else if (reg.cn.test(this.data.password)) {
-                // util.showToast({type: 'warn', hide: false, text: '密码不能包含中文符号'},_this)
-                return false;
-            } else if (!reg.password.test(this.data.password)) {
-                // util.showToast({type: 'warn', hide: false, text: '密码为6~32位字符，支持英文、数字及英文符号'},_this)
-                return false;
-            } else {
-                let postData = {
-                    method: 'user.login',
-                    v: '1.0',
-                    bizContent: {
-                        'userName': this.data.userName,
-                        'password': this.data.password,
-                        'deviceToken': ''
-                    }
-                };
-                // wx.showToast({title: '登录中...', icon: 'loading', duration: 10000})
-                console.log(_this.data.ajaxLoading);
-                if (!_this.data.ajaxLoading) {
-                    _this.setData({ ajaxLoading: true });
-                    console.log('ajax');
-                    // app.ajax({
-                    //     data: postData,
-                    //     success: function(res) {
-                    //         _this.setData({ajaxLoading: false});
-                    //         wx.hideToast();
-                    //         if (res.code == '0000') {
-                    //             _this.setData({ajaxLoading: true});
-                    //             wx.showToast({title: '登录成功', icon: 'success', duration: 10000,
-                    //             success:function () {
-                    //                 setTimeout(() => {
-                    //                   _this.setData({ajaxLoading: false});
-                    //                   wx.switchTab({url: '/pages/index/index'})
-                    //                 } ,1200)
-                    //             }})
-                    //             wx.setStorageSync('sessionId', res.data.sessionId);
-                    //             wx.setStorageSync('userName', res.data.userName);
-                    //
-                    //             if(_this.data.projectId && _this.data.from == 'detail'){
-                    //               // wx.redirectTo({url:'/pages/detail/'+ _this.data.from+ "?projectId="+_this.data.projectId});
-                    //               wx.navigateBack({delta: 1});
-                    //             }
-                    //         } else {
-                    //             if (res.subErrors) {
-                    //                 var errCode = res.subErrors[0].code,
-                    //                     errMsg = '';
-                    //                 switch (errCode) {
-                    //                     case 'isv.user-login-service-error:ERROR_IMGCODE':
-                    //                         errMsg = '图形验证码不正确';
-                    //                         break;
-                    //                     case 'isv.user-login-service-error:PASSWORD_ERROR':
-                    //                         errMsg = '密码错误，错误5次将锁定账号';
-                    //                         break;
-                    //                     case 'isv.user-login-service-error:USERNAME_NOT_NULL':
-                    //                         errMsg = '用户名不能为空';
-                    //                         break;
-                    //                     case 'isv.user-login-service-error:PASSWORD_NOT_NULL':
-                    //                         errMsg = '密码不能为空';
-                    //                         break;
-                    //                     case 'isv.user-login-service-error:USER_NOT_EXIST':
-                    //                         errMsg = '用户不存在';
-                    //                         break;
-                    //                     case 'isv.user-login-service-error:USER_PASSWORD_ERROR_FIVE':
-                    //                         errMsg = '本用户已锁定，请联系客服处理';
-                    //                         break;
-                    //                     case 'isv.user-login-service-error:USER_LOCKED':
-                    //                         errMsg = '本用户已锁定，请联系客服处理';
-                    //                         break;
-                    //                     default:
-                    //                         errMsg = res.subErrors[0].message;
-                    //                         break;
-                    //                 }
-                    //                 //提示
-                    //                 util.showToast({type: 'warn', hide: false, text: errMsg},_this)
-                    //             } else {
-                    //                 util.showToast({type: 'warn', hide: false, text: res.message},_this)
-                    //             }
-                    //         }
-                    //     }
-                    // });
-                }
-            }
-        },
-        clearUserName: function () {
-            this.userName = "";
-        },
-        clearPassword: function () {
-            this.password = "";
-        },
-        listenerUserName: function (e) {
-            this.userName = e.value;
-        },
-        listenerPassword: function (e) {
-            this.password = e.value;
-        },
-        switch: function () {
-            this.switchOn = !this.switchOn;
-            this.passwordType = this.passwordType == 'text' ? 'password' : 'text';
-        },
-        openRegister: function () {
-            // var params = {
-            //         'url': 'register.js',
-            //         'animated': 'true'
-            //     };
-            // navigator.push(params,function (e) {
-            //
-            // })
-        }
-    }
-};</script>

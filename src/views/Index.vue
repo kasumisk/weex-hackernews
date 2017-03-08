@@ -1,8 +1,8 @@
 <template>
 <div class="container">
-    <scroller class="scroller" :style="{ width: '750px', height: deviceHeight + 'px' }" @loadmore="loadMoreinvests" loadmoreoffset="80">
-        <refresh class="refresh-view" :display="refresh_display" @refresh="fetchInvest">
-              <text v-if="(refresh_display==='hide')">↓ pull to refresh</text>
+    <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }" @loadmore="loadMoreinvests" loadmoreoffset="80">
+        <refresh class="refresh-view"  :display="refreshing ? 'show' : 'hide'" @refresh="fetchInvest">
+              <text v-if="(!refreshing)">↓ pull to refresh</text>
               <loading-indicator class="indicator"></loading-indicator>
           </refresh>
         <div class="header">
@@ -20,11 +20,14 @@
                     <div class="principal flex-1">
                         <text class="main-text">{{item.rate}}%</text>
                     </div>
-                    <div class="rate flex-1">
+                    <div class=" flex-1">
                         <div class="flex-row align-end">
                             <text class="main-text">{{item.term}}</text>
                             <text class="main-sub-text">个月</text>
                         </div>
+                    </div>
+                    <div class="rate">
+                        <text class="rate-text">{{Math.floor(item.progress)}}%</text>
                     </div>
                 </div>
                 <div class="item-footer flex-row">
@@ -54,7 +57,7 @@ import {
 } from 'vuex'
 
 import AppTabBar from '../components/app-tabbar.vue'
-
+import config from '../util/config.js'
 module.exports = {
     components: {
         AppTabBar
@@ -62,26 +65,25 @@ module.exports = {
     data() {
         return {
             loading: false,
-            refresh_display: 'hide',
-            loading_display: 'hide',
-            deviceHeight:0
+            refreshing: false,
+            loading_display: 'hide'
         }
     },
     created: function() {
-        this.deviceHeight = weex.config.env.deviceHeight - 228;
         this.fetchInvest();
     },
     computed: mapGetters({
-        projects_list: 'projects_list'
+        projects_list: 'projects_list',
+        clientHeight:'clientHeight'
     }),
     methods: {
         fetchInvest() {
-            this.refresh_display = 'show'
+            this.refreshing = true
             if (!this.loading) {
                 this.loading = true
                 this.$store.dispatch('FETCH_PROJECTS').then(() => {
                     this.loading = false
-                    this.refresh_display = 'hide'
+                    this.refreshing = false
                 })
             }
         },
@@ -138,11 +140,28 @@ module.exports = {
       justify-content: space-between;
   }
   .item-body{
-      margin-top: 30px;
-      margin-bottom: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      align-items: center;
   }
   .item-footer{
        justify-content: space-between;
+  }
+  .rate{
+      border-width: 5px;
+      border-style: solid;
+      border-color: #32c1d4;
+      border-radius: 40px;
+      width: 80px;
+      height: 80px;
+  }
+  .rate-text{
+      font-size: 24px;
+      text-align: center;
+      align-items: center;
+      color: #32c1d4;
+      padding-top: 20px;
+      padding-bottom: 20px;
   }
   .status{
       text-align: right;

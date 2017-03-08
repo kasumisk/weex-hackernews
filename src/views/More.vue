@@ -23,7 +23,7 @@
             <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </a>
-    <a class="cell-access justify-space" href="" style="border-bottom-width:0;">
+    <external-link class="cell-access justify-space" href="" style="border-bottom-width:0;" url = 'https://www.baidu.com/'>
         <div class="cell-grow mr25">
             <image src="http://192.168.2.113:8080/dist/images/more3.png" class="icon" resize="contain"></image>
         </div>
@@ -33,7 +33,7 @@
         <div class="text-right cell-grow">
             <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
-    </a>
+    </external-link>
     <a class="cell-access justify-space mt20" href="">
         <div class="cell-grow mr25">
             <image src="http://192.168.2.113:8080/dist/images/more4.png" class="icon" resize="contain"></image>
@@ -78,7 +78,7 @@
             <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </div>
-    <div class="cell-access justify-space" @click="jump('/user/info')">
+    <div class="cell-access justify-space" @click="jump('/user/register')">
         <div class="cell-grow mr25">
             <image src="http://192.168.2.113:8080/dist/images/more8.png" class="icon" resize="contain"></image>
         </div>
@@ -95,9 +95,10 @@
 
 <script>
 // var apis = require('./common/api');
+import externalLink from '../components/external-link.vue'
 import AppTabBar from '../components/app-tabbar.vue'
 module.exports = {
-    components:{AppTabBar},
+    components:{AppTabBar,externalLink},
     props: {
         lists: {
             default: function() {

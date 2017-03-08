@@ -2,9 +2,10 @@ let CryptoJS = require('./sha1.js')
 
 let config = {
     // api : 'https://bank.mindai.com/api',
-    api: "http://127.0.0.1:8000/api/",
+    // api: "http://127.0.0.1:8000/api/",
     resouce:'http://192.168.2.113:1337/dist/',
-    //api : 'https://121.196.208.139/api',
+    // api : 'https://121.196.208.139/api',
+    api : 'http://121.196.208.139/api',
     // api : 'http://192.168.2.32:8087/api',
     appKey: '00000004',
     appKeySecret: 'O2F2L0I84LC9U1KP',

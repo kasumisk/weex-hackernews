@@ -1,12 +1,21 @@
 const stream = weex.requireModule('stream')
 const baseURL = 'http://192.168.2.113:1337/dist/json'
 
-export function fetch (path) {
+import { Encrypt } from '../util/util.js'
+import config from '../util/config.js'
+
+
+export function fetch (path , params) {
+  // let body = JSON.stringify(Encrypt(params))
+  // let body = Encrypt(params)
+
   return new Promise((resolve, reject) => {
     stream.fetch({
       method: 'GET',
       url: `${baseURL}/${path}.json`,
-      type: 'json'
+    //   url: config.api,
+      type: 'json',
+    //   body:body
     }, (response) => {
       if (response.status == 200) {
           console.log(response);
@@ -49,5 +58,13 @@ export function fetchInvest() {
 }
 
 export function fetchprojects(){
+    // let postData = {
+    //         method: 'general.projectsList',
+    //         v: '1.0',
+    //         bizContent: {
+    //             pageNum: 1,
+    //             pageSize: 10,
+    //         }
+    //     }
     return fetch(`projects`)
 }

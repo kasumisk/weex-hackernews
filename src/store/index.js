@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import actions from './actions/index.js'
 import mutations from './mutations/index.js'
 import getters from './getters/index.js'
-
+import config from '../util/config.js'
 // Vuex is auto installed on the web
 if (WXEnvironment.platform !== 'Web') {
     Vue.use(Vuex)
@@ -24,6 +24,7 @@ const store = new Vuex.Store({
             },
             repackets:[]
         },
+        clientHeight:config.clientHeight,
         projects: {
             lists:{
                 pageNum:0,

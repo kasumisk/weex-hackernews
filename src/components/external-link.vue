@@ -19,7 +19,7 @@
         }
 
         // change router path on native (Android & iOS)
-        this.jump(`/article/${this.url}`)
+        this.jump(`/web/${this.url}`)
       }
     }
   }
