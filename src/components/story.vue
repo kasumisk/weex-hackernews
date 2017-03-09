@@ -1,10 +1,10 @@
 <template>
   <div class="cell-item">
     <text class="story-score">{{story.score}}</text>
-    <external-link :url="story.url" class="story-link">
+    <jump-web :url="story.url" class="story-link">
       <text class="story-title">{{story.title}}</text>
       <text class="small-text" v-if="story.url">({{ story.url | host }})</text>
-    </external-link>
+    </jump-web>
     <div class="text-group">
       <text class="small-text text-cell">by </text>
       <div class="text-cell" @click="jump(`/user/${story.by}`)">
@@ -68,10 +68,10 @@
 </style>
 
 <script>
-  import ExternalLink from './external-link.vue'
+  import jumpWeb from './jump-web.vue'
 
   export default {
-    components: { ExternalLink },
+    components: { jumpWeb },
     props: {
       story: {
         type: Object,

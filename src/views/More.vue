@@ -23,7 +23,7 @@
             <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </a>
-    <external-link class="cell-access justify-space" href="" style="border-bottom-width:0;" url = 'https://www.baidu.com/'>
+    <jump-web class="cell-access justify-space" href="" style="border-bottom-width:0;" url = 'https://www.baidu.com/'>
         <div class="cell-grow mr25">
             <image src="http://192.168.2.113:8080/dist/images/more3.png" class="icon" resize="contain"></image>
         </div>
@@ -33,7 +33,7 @@
         <div class="text-right cell-grow">
             <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
-    </external-link>
+    </jump-web>
     <a class="cell-access justify-space mt20" href="">
         <div class="cell-grow mr25">
             <image src="http://192.168.2.113:8080/dist/images/more4.png" class="icon" resize="contain"></image>
@@ -95,10 +95,10 @@
 
 <script>
 // var apis = require('./common/api');
-import externalLink from '../components/external-link.vue'
+import jumpWeb from '../components/jump-web.vue'
 import AppTabBar from '../components/app-tabbar.vue'
 module.exports = {
-    components:{AppTabBar,externalLink},
+    components:{AppTabBar,jumpWeb},
     props: {
         lists: {
             default: function() {

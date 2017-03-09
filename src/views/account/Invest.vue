@@ -76,7 +76,6 @@ module.exports = {
     },
   data(){
       return {
-          loading:false,
           refresh_display:'hide',
           loading_display:'hide'
       }
@@ -86,16 +85,15 @@ module.exports = {
   },
   computed: mapGetters({
     invests: 'invests',
-    tab_cur: 'invest_tab_cur'
+    tab_cur: 'invest_tab_cur',
+    loading: 'loading'
   }),
   methods: {
     tabChange: function (tab_cur) {
         if(!this.loading){
-            this.loading = true
             this.$store.dispatch('TAB_INVESTLIST',{
                 tab_cur:tab_cur
             }).then(() =>{
-                this.loading = false;
                 this.loading_display = 'hide'
             })
         }
@@ -103,9 +101,7 @@ module.exports = {
     fetchInvest() {
         this.refresh_display = 'show'
         if(!this.loading){
-            this.loading = true
             this.$store.dispatch('FETCH_INVESTLIST', {tab_cur:this.tab_cur}).then(() => {
-                this.loading = false
                 this.refresh_display = 'hide'
             })
         }
@@ -113,10 +109,9 @@ module.exports = {
     loadMoreinvests(){
         console.log('loadmore');
         this.loading_display = 'show'
+        console.log(this.loading);
         if(!this.loading){
-            this.loading = true
             this.$store.dispatch('LOAD_MORE_INVESTLIST',{tab_cur:this.tab_cur}).then(() => {
-              this.loading = false
               this.loading_display = 'hide'
             })
         }

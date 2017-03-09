@@ -11,7 +11,7 @@
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_01.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input  class="input-text" type="text" value="" placeholder="手机号/用户名" maxlength="20" @input = "inputUserName"/>
+                  <input  class="input-text" type="text"  placeholder="手机号/用户名"  @input = "inputUserName"/>
               </div>
               <div class="form-ft">
                   <image src="http://app1.mindai.com/images/x-29.png" v-if="userName" @click="clear('userName')"></image>
@@ -22,7 +22,7 @@
                   <image src="http://192.168.2.113:8080/dist/images/icons-1_02.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
-                  <input  class="input-text" :type="passwordType" value=""  placeholder="请输入密码" maxlength="20" @input = "inputPassWord"/>
+                  <input  class="input-text" :type="passwordType"  placeholder="请输入密码" @input = "inputPassWord"/>
               </div>
               <div class="form-ft">
                   <div style="flex-direction:row;">
@@ -47,15 +47,13 @@
 
 module.exports = {
     // props: {
-    //   userName: {
-    //     type: String,
-    //     required: true,
-    //     default: ''
-    //     },
     //     userName: {
-    //       type: String,
-    //       required: true,
-    //       default: ''
+    //         type: String,
+    //         default: ''
+    //     },
+    //     password: {
+    //         type: String,
+    //         default: ''
     //     }
     // },
     data(){

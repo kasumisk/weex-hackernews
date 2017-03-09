@@ -166,7 +166,6 @@ import AppTabBar from '../components/app-tabbar.vue'
     },
     data() {
         return {
-            loading: false,
             default: 0
         }
     },
@@ -178,20 +177,21 @@ import AppTabBar from '../components/app-tabbar.vue'
     // },
     computed: mapGetters({
         account: 'account',
-        clientHeight:'clientHeight'
+        clientHeight:'clientHeight',
+        loading:'loading'
     }),
 
     created() {
         // this.login = true;
-        this.deviceHeight = weex.config.env.deviceHeight - 228;
         this.fetchAccount();
     },
     methods: {
         fetchAccount() {
-            this.loading = true
-            this.$store.dispatch('FETCH_ACCOUNT', {}).then(() => {
-                this.loading = false
-            })
+            if(!this.loading){
+                this.$store.dispatch('FETCH_ACCOUNT', {}).then(() => {
+
+                })
+            }
         }
     }
 };

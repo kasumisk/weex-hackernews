@@ -42,6 +42,7 @@
       },
       created () {
            this.deviceHeight = config.clientHeight;
+           console.log("tab============="+this.deviceHeight);
         //   this.configEnv = weex.config.env;
         //   this.configEnv.deviceHeight -= 96;
         //   console.log(weex.config.env);

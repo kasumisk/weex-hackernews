@@ -4,6 +4,7 @@ import actions from './actions/index.js'
 import mutations from './mutations/index.js'
 import getters from './getters/index.js'
 import config from '../util/config.js'
+console.log(config.clientHeight);
 // Vuex is auto installed on the web
 if (WXEnvironment.platform !== 'Web') {
     Vue.use(Vuex)
@@ -14,7 +15,7 @@ const store = new Vuex.Store({
     mutations,
     getters,
     state: {
-        activeType: null,
+        loading: false,
         login: false,
         user:{
             account: {},

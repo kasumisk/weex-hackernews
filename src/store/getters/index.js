@@ -3,11 +3,13 @@ import * as invests from './invests.js'
 import * as projects from './projects.js'
 
 const total = {
-    clientHeight:function (state) {
+    clientHeight(state) {
         return state.clientHeight;
+    },
+    loading (state) {
+        return state.loading;
     }
 }
-
 
 const getters = Object.assign({}, total,account, invests, projects);
 

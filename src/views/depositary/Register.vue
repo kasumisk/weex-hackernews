@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <scroller class="scroller" :style="{ width: '750px', height: deviceHeight }">
+        <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }">
             <div class="banner">
                 <image class="logo" src="http://192.168.2.113:8080/dist/images/zs-logo-4.png" resize="contain"></image>
             </div>
@@ -19,10 +19,10 @@
             <div class="cell flex-row" style="background-color:transparent;">
                 <div class="flex-1 flex-row" @click="province">
                     <image class="icon" style="margin-right:20px;" src="http://192.168.2.113:8080/dist/images/openIcon3.png" resize="contain"></image>
-                    <text class="text">{{userInfo.provinceValue || "银行开户省份"}}</text>
+                    <text class="text">{{provinceValue || "银行开户省份"}}</text>
                 </div>
                 <div class="flex-1" @click="region">
-                    <text class="text">{{userInfo.regionValue || "银行开户地区"}}</text>
+                    <text class="text">{{regionValue || "银行开户地区"}}</text>
                 </div>
             </div>
             <div class="cell">
@@ -45,37 +45,34 @@
 </template>
 
 <script>
-
+import {
+    mapGetters,
+    mapActions
+} from 'vuex'
 // var util = require('./utils/util.js');
 var picker = weex.requireModule('picker');
 module.exports = {
-    props: {
-        userInfo: {
-            default: function () {
-                return {
-                    userName: '',
-                    userId: '',
-                    phone: '',
-                    realName: '',
-                    cardId: '',
-                    isRealNameAuth: '',
-                    bankCardNum: '',
-                    provinceValue: '',
-                    regionValue: ''
-                };
-            }
-        },
-        deviceHeight: {
-            default: ''
+    data(){
+        return {
+            userName: '',
+            userId: '',
+            phone: '',
+            realName: '',
+            cardId: '',
+            isRealNameAuth: '',
+            bankCardNum: '',
+            provinceValue: '',
+            regionValue: '',
+            bankPhone:'',
+            smsCode:''
         }
     },
-    init: function () {
-        // 页面初始化 options为页面跳转所带来的参数
-    },
+    computed: mapGetters({
+        clientHeight:'clientHeight'
+    }),
     created: function () {
-        this.deviceHeight = this.$getConfig().env.deviceHeight - 120;
+
     },
-    ready: function () {},
     methods: {
         region: function () {
             var items = new Array("广西", "广东", "江西", "湖南", "湖北", "云南", "山西", "");
@@ -86,7 +83,7 @@ module.exports = {
             }, function (ret) {
                 var result = ret.result;
                 if (result == 'success') {
-                    self.userInfo.regionValue = items[ret.data];
+                    self.regionValue = items[ret.data];
                     self.index = ret.data;
                 }
             });
@@ -100,7 +97,7 @@ module.exports = {
             }, function (ret) {
                 var result = ret.result;
                 if (result == 'success') {
-                    self.userInfo.provinceValue = items[ret.data];
+                    self.provinceValue = items[ret.data];
                     self.index = ret.data;
                 }
             });
