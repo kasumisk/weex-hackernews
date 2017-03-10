@@ -8,6 +8,9 @@ const total = {
     },
     loading (state) {
         return state.loading;
+    },
+    loginStatus(state){
+
     }
 }
 

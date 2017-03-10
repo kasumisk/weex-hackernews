@@ -91,7 +91,7 @@ module.exports = {
         }
     },
     created: function () {
-        
+
     },
     methods: {
         imgLoad: function (e) {
@@ -175,6 +175,9 @@ module.exports = {
     font-size: 40px;
     border-radius: 10px;
     border-width: 0;
+}
+.button:active{
+    background-color:red;
 }
 .button-text{
     color: #fff;

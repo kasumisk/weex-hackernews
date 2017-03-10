@@ -54,7 +54,7 @@ export default new Router({
     { path: '/article/:url(.*)?', component: ArticleView },
     { path: '/item/:id(\\d+)', component: CommentView },
     { path: '/users/:id', component: UserView },
-    // { path: '/', redirect: '/user/login' },
+    // { path: '/', redirect: '/account' },
     // tabbar
     { path: '/', component: IndexView },
     { path: '/more', component: MoreView },

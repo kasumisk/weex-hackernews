@@ -1,4 +1,6 @@
 export function SET_ACCOUNT(state , { account }) {
-    state.user.account = account
-    state.login = true
+    if(account.code === '0000'){
+        state.user.account = account.data
+        state.login = true
+    }
 }

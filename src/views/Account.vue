@@ -6,8 +6,12 @@
             <text>前往登录</text>
         </a>
     </div> -->
-    <div class="login">
+    <div class="login" v-if="!loading">
         <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }">
+            <refresh class="refresh-view" :display="refreshing ? 'show' : 'hide'" @refresh="fetchAccount(true,sessionId)">
+                <text v-if="(!refreshing)">↓ pull to refresh</text>
+                <loading-indicator class="indicator"></loading-indicator>
+            </refresh>
             <div class="cells cell-user bgc-white">
                 <a class="cell-access flex flex-center" url="/pages/user/my-info">
                     <div class="cell-hd" style="margin-right:20px;">
@@ -150,23 +154,18 @@
     mapActions
 } from 'vuex'
 import AppTabBar from '../components/app-tabbar.vue'
+import util from '../util/util.js'
+ var modal = weex.requireModule('modal')
 
   export default {
     components: {
         AppTabBar
     },
-    props: {
-        account: {
-            default: function() {
-                return {
-                    isDepository: 0
-                };
-            }
-        }
-    },
     data() {
         return {
-            default: 0
+            default: 0,
+            refreshing:false,
+            sessionId:''
         }
     },
     // computed: {
@@ -183,12 +182,21 @@ import AppTabBar from '../components/app-tabbar.vue'
 
     created() {
         // this.login = true;
-        this.fetchAccount();
+        var _this = this;
+        _this.fetchAccount(false,this.sessionId);
+        // util.getLocationStorage('sessionId').then((res) =>{
+        //     _this.sessionId = res
+        // })
+    //     modal.toast({
+    //      message: 'This is a toast',
+    //      duration: 0.3
+    //    })
     },
     methods: {
-        fetchAccount() {
-            if(!this.loading){
-                this.$store.dispatch('FETCH_ACCOUNT', {}).then(() => {
+        fetchAccount(boolean , sessionId ) {
+            if(!this.loading && !this.account.userId || boolean){
+                console.log('加载');
+                this.$store.dispatch('FETCH_ACCOUNT', {sessionId}).then(() => {
 
                 })
             }

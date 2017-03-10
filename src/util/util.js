@@ -1,11 +1,12 @@
 let CryptoJS = require('./sha1.js')
-
+const storage = weex.requireModule('storage')
 let config = {
     // api : 'https://bank.mindai.com/api',
     // api: "http://127.0.0.1:8000/api/",
     resouce:'http://192.168.2.113:1337/dist/',
     // api : 'https://121.196.208.139/api',
-    api : 'http://121.196.208.139/api',
+    // api : 'http://121.196.208.139/api',
+    api : 'http://121.196.215.15:8087/api',
     // api : 'http://192.168.2.32:8087/api',
     appKey: '00000004',
     appKeySecret: 'O2F2L0I84LC9U1KP',
@@ -21,6 +22,34 @@ let config = {
     }
 }
 
+function setLocationStroage(key,value) {
+    return new Promise((resolve, reject) => {
+        storage.setItem(key,value,(e) =>{
+            if(e.result === 'success'){
+                resolve(e.data)
+            }else {
+                reject(e.data)
+            }
+
+        })
+    })
+}
+
+
+
+function getLocationStorage(key) {
+    return new Promise((resolve, reject) => {
+        storage.getItem(key,(e) =>{
+            if(e.result === 'success'){
+                resolve(e.data)
+            }else {
+                reject(e.data)
+            }
+
+        })
+    })
+
+}
 function getBJTime() {
     let localDate = new Date(),
         utc = localDate.getTime() + (localDate.getTimezoneOffset() * 60000),
@@ -55,29 +84,36 @@ function aesEncrypt(data, keyStr, ivStr) {
 }
 
 
-function Encrypt(options) {
+function Encrypt(options,callback) {
     options.bizContent.deviceType = 'ios';
 
     let config1 = Object.assign({}, config.data, options);
     config.data = config1;
 
-    let bizContent = aesEncrypt(JSON.stringify(config.data.bizContent), config.appKeySecret, config.appKeySecret),
-        signStr = config.appKeySecret + 'appKey' + config.appKey + 'bizContent' + bizContent + 'formatjsonlocalecnmethod' + config.data.method + 'sessionId' + options.storage + 'timestamp' + config.timestamp + 'v' + config.data.v + config.appKeySecret,
-        sign = CryptoJS.SHA1(signStr).toString().toUpperCase()
+    console.log('配置:',options);
+    console.log('内容:',config);
 
-    let data = {
-        method: config.data.method,
-        v: config.data.v,
-        sessionId: options.storage,
-        bizContent: bizContent,
-        appKey: config.appKey,
-        format: config.format,
-        locale: config.locale,
-        timestamp: config.timestamp,
-        sign: sign
-    }
-    var body = JSON.stringify(data);
-    return body;
+    getLocationStorage("sessionId").then((sessionId)=>{
+        console.log('bizContent:',config.data.bizContent);
+        let bizContent = aesEncrypt(JSON.stringify(config.data.bizContent), config.appKeySecret, config.appKeySecret),
+            signStr = config.appKeySecret + 'appKey' + config.appKey + 'bizContent' + bizContent + 'formatjsonlocalecnmethod' + config.data.method + 'sessionId' + sessionId + 'timestamp' + config.timestamp + 'v' + config.data.v + config.appKeySecret,
+            sign = CryptoJS.SHA1(signStr).toString().toUpperCase()
+
+        let body = {
+            method: config.data.method,
+            v: config.data.v,
+            sessionId: sessionId,
+            bizContent: bizContent,
+            appKey: config.appKey,
+            format: config.format,
+            locale: config.locale,
+            timestamp: config.timestamp,
+            sign: sign
+        }
+        callback && callback(body)
+    })
+
+
 }
 
 function ajax(options, noReturn) {
@@ -308,11 +344,13 @@ function formatPhone(str) {
 }
 
 module.exports = {
-    ajax : ajax,
     moneyFormat : moneyFormat,
     residentId : residentId,
     formatName: formatName,
     formatPhone:formatPhone,
-    Encrypt:Encrypt,
-    config:config
+    Encrypt,
+    getBJTime,
+    config,
+    setLocationStroage,
+    getLocationStorage
 };

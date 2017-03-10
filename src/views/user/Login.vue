@@ -35,7 +35,7 @@
               </div>
           </div>
         </div>
-        <text class="submit">登录</text>
+        <text class="button" @click="login">登录</text>
         <a class="reg-link mt30" href="./register.js">
           <text style="text-align:center;">没有账号？立即注册</text>
         </a>
@@ -44,7 +44,12 @@
 </template>
 
 <script>
+import {
+    mapGetters,
+    mapActions
+} from 'vuex'
 
+import util from '../../util/util.js'
 module.exports = {
     // props: {
     //     userName: {
@@ -64,13 +69,22 @@ module.exports = {
             switchOn:false
         }
     },
+    computed: mapGetters({
+        loading:'loading'
+    }),
     created: function () {
         // 页面初始化 options为页面跳转所带来的参数
 
     },
     methods: {
-        login: function (e) {
-
+        login: function () {
+            if(!this.loading){
+                this.$store.dispatch('LOGIN_ACTION',{userName:this.userName,password:this.password}).then(() => {
+                    util.getLocationStorage('sessionId').then((res)=>{
+                        console.log(res);
+                    })
+                })
+            }
         },
         clear(type){
             if(type == 'userName'){
@@ -199,7 +213,7 @@ module.exports = {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-.submit{
+.button{
   font-size: 36px;
   color: #fff;
   background-color: #32c1d4;

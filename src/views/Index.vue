@@ -9,7 +9,7 @@
                 <image src="http://120.25.77.23:3131/mz/images/banner.png" resize="cover" class="banner" style="width:750px; height:200px;"></image>
                 <image src="http://120.25.77.23:3131/mz/images/cunguan.png" resize="cover" class="sub-banner" style="width:750px; height:220px;"></image>
             </div>
-            <div class="cell" v-for="item in projects_list.list" :key="item.id" append="tree">
+            <div class="cell" v-for="item in projects.list" :key="item.id" append="tree">
                 <div class="item">
                     <div class="item-header flex-row">
                         <text class="title flex-1">{{item.projectId}}</text>
@@ -71,15 +71,16 @@ module.exports = {
         this.fetchInvest();
     },
     computed: mapGetters({
-        projects_list: 'projects_list',
+        projects: 'projects',
         clientHeight:'clientHeight',
         loading:'loading'
     }),
     methods: {
         fetchInvest() {
             this.refreshing = true
+            console.log(this.projects.pageNum);
             if (!this.loading) {
-                this.$store.dispatch('FETCH_PROJECTS').then(() => {
+                this.$store.dispatch('FETCH_PROJECTS',{ pageNum:this.projects.pageNum , pageSize:this.projects.pageSize}).then(() => {
                     this.refreshing = false
                 })
             }
@@ -89,7 +90,7 @@ module.exports = {
             console.log(this.loading);
             this.loading_display = 'show'
             if (!this.loading) {
-                this.$store.dispatch('LOAD_MORE_PROJECTS').then(() => {
+                this.$store.dispatch('LOAD_MORE_PROJECTS',{ pageNum:this.projects.pageNum , pageSize:this.projects.pageSize}).then(() => {
                     this.loading_display = 'hide'
                 })
             }
