@@ -82,6 +82,7 @@ module.exports = {
             if (!this.loading) {
                 this.$store.dispatch('FETCH_PROJECTS',{ pageNum:this.projects.pageNum , pageSize:this.projects.pageSize}).then(() => {
                     this.refreshing = false
+                    console.log(this.projects)
                 })
             }
         },

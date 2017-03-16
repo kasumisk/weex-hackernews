@@ -16,7 +16,7 @@
                 <a class="cell-access flex flex-center" url="/pages/user/my-info">
                     <div class="cell-hd" style="margin-right:20px;">
                         <div class="cell-icon">
-                            <image :src="account.headImgUrl||'http://192.168.2.113:8080/dist/images/head_img_member.png'" style="width:70px;height:70px;"></image>
+                            <image :src="account.headImgUrl||'http://192.168.2.113:1337/dist/images/head_img_member.png'" style="width:70px;height:70px;"></image>
                         </div>
                     </div>
                     <div class="cell-bd">
@@ -24,7 +24,7 @@
                         <text class="sub-info">{{account.phone}}</text>
                     </div>
                     <div class="cell-ft">
-                        <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+                        <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
                     </div>
                 </a>
             </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="depository-yes" v-if="account.isDepository != 0">
                         <div class="zs-card-num flex-row">
-                            <image class="zs-logo" src="http://192.168.2.113:8080/dist/images/zsLogo.png" resize="contain"></image>
+                            <image class="zs-logo" src="http://192.168.2.113:1337/dist/images/zsLogo.png" resize="contain"></image>
                             <text class="main-sub-info">存管帐号&nbsp;&nbsp;{{account.depositoryId}}</text>
                         </div>
                         <div class="amount-all">
@@ -72,26 +72,26 @@
             <div class="cells cell-main cells-hasIcon mt30 bgc-white">
                 <div class="cell-access flex flex-center" @click="jump('/invest/0')" style="border-bottom-width:2px; border-bottom-style:solid;border-bottom-color:#e6e6e6;">
                     <div class="cell-hd">
-                        <image class="cell-icon icon-rmb" src="http://192.168.2.113:8080/dist/images/icon-rmb.png" style="width:34px;height:42px;"></image>
+                        <image class="cell-icon icon-rmb" src="http://192.168.2.113:1337/dist/images/icon-rmb.png" style="width:34px;height:42px;"></image>
                     </div>
                     <div class="cell-bd">
                         <text class="main-txt">项目投资</text>
                         <text class="main-sub-info">累计已投{{account.allInvestAmount}}元，已赚{{account.hasGotInterest}}元</text>
                     </div>
                     <div class="cell-ft">
-                        <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+                        <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
                     </div>
                 </div>
                 <div class="cell-access flex flex-center" url="/pages/my-account/recovery-list">
                     <div class="cell-hd">
-                        <image class="cell-icon icon-check" src="http://192.168.2.113:8080/dist/images/icon-check.png" style="width:34px;height:42px;"></image>
+                        <image class="cell-icon icon-check" src="http://192.168.2.113:1337/dist/images/icon-check.png" style="width:34px;height:42px;"></image>
                     </div>
                     <div class="cell-bd">
                         <text class="main-txt">回款计划</text>
                         <text class="main-sub-info">待收本金{{account.reclaimPrincipal}}元，利息{{account.reclaimInterest}}元</text>
                     </div>
                     <div class="cell-ft">
-                        <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+                        <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
                     </div>
                 </div>
             </div>
@@ -99,39 +99,39 @@
             <div class="cells cell-main cells-hasIcon mt30 bgc-white" style="border-bottom-width:2px; border-bottom-style:solid;border-bottom-color:#e6e6e6;">
                 <div class="cell-access flex flex-center" url="/pages/my-account/transaction-record">
                     <div class="cell-hd">
-                        <image class="cell-icon icon-list" src="http://192.168.2.113:8080/dist/images/icon-list.png" style="width:34px;height:42px;"></image>
+                        <image class="cell-icon icon-list" src="http://192.168.2.113:1337/dist/images/icon-list.png" style="width:34px;height:42px;"></image>
                     </div>
                     <div class="cell-bd">
                         <text class="main-txt">交易记录</text>
                     </div>
                     <div class="cell-ft">
-                        <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+                        <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
                     </div>
                 </div>
             </div>
             <div class="cells cell-main cells-hasIcon bgc-white">
-                <div class="cell-access flex flex-center" href="http://192.168.2.113:8080/dist/account/redpacket.js">
+                <div class="cell-access flex flex-center" href="http://192.168.2.113:1337/dist/account/redpacket.js">
                     <div class="cell-hd">
-                        <image class="cell-icon icon-repacket" src="http://192.168.2.113:8080/dist/images/icon-repacket.png" style="width:34px;height:42px;"></image>
+                        <image class="cell-icon icon-repacket" src="http://192.168.2.113:1337/dist/images/icon-repacket.png" style="width:34px;height:42px;"></image>
                     </div>
                     <div class="cell-bd">
                         <text class="main-txt">我的红包</text>
                     </div>
                     <div class="cell-ft">
-                        <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+                        <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
                     </div>
                 </div>
             </div>
             <div class="cells cell-main cells-hasIcon mt30 bgc-white">
                 <div class="cell-access flex flex-center" url="/pages/my-account/transaction-record">
                     <div class="cell-hd">
-                        <image class="cell-icon icon-repacket" src="http://192.168.2.113:8080/dist/images/icon-repacket.png" style="width:34px;height:42px;"></image>
+                        <image class="cell-icon icon-repacket" src="http://192.168.2.113:1337/dist/images/icon-repacket.png" style="width:34px;height:42px;"></image>
                     </div>
                     <div class="cell-bd">
                         <text class="main-txt">我的红包</text>
                     </div>
                     <div class="cell-ft">
-                        <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+                        <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
                     </div>
                 </div>
             </div>

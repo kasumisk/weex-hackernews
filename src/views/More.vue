@@ -2,7 +2,7 @@
 <div class="container">
     <div class="cell-access justify-space" style="padding-right:10px;">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more1.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more1.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">客服热线</text>
@@ -14,79 +14,79 @@
     </div>
     <a class="cell-access justify-space" href="">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more2.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more2.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">帮助中心</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </a>
     <jump-web class="cell-access justify-space" href="" style="border-bottom-width:0;" url = 'https://www.baidu.com/'>
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more3.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more3.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">联系我们</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </jump-web>
     <a class="cell-access justify-space mt20" href="">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more4.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more4.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">平台介绍</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </a>
     <a class="cell-access justify-space" href="">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more5.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more5.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">安全保障</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </a>
     <a class="cell-access justify-space" href="" style="border-bottom-width:0;">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more6.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more6.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">服务协议</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </a>
     <div class="cell-access justify-space mt20" @click="jump('/user/login')">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more7.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more7.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">登录</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </div>
     <div class="cell-access justify-space" @click="jump('/user/register')">
         <div class="cell-grow mr25">
-            <image src="http://192.168.2.113:8080/dist/images/more8.png" class="icon" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/more8.png" class="icon" resize="contain"></image>
         </div>
         <div class="cell">
             <text class="text">注册</text>
         </div>
         <div class="text-right cell-grow">
-            <image src="http://192.168.2.113:8080/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
+            <image src="http://192.168.2.113:1337/dist/images/rightArrow.png" class="arrow-right" resize="contain"></image>
         </div>
     </div>
     <AppTabBar></AppTabBar>

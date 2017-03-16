@@ -8,7 +8,7 @@
         <div class="forms-mh30 forms-gray forms-radius">
           <div class="form" style="border-bottom-color:#ccc; border-bottom-style:solid; border-bottom-width:2px;">
               <div class="form-hd">
-                  <image src="http://192.168.2.113:8080/dist/images/icons-1_01.png" class="icon form-icon"></image>
+                  <image src="http://192.168.2.113:1337/dist/images/icons-1_01.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
                   <input  class="input-text" type="text"  placeholder="手机号/用户名"  @input = "inputUserName"/>
@@ -19,7 +19,7 @@
           </div>
           <div class="form">
               <div class="form-hd">
-                  <image src="http://192.168.2.113:8080/dist/images/icons-1_02.png" class="icon form-icon"></image>
+                  <image src="http://192.168.2.113:1337/dist/images/icons-1_02.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
                   <input  class="input-text" :type="passwordType"  placeholder="请输入密码" @input = "inputPassWord"/>
@@ -29,7 +29,7 @@
                     <image src="http://app1.mindai.com/images/x-29.png" v-if="password" @click="clear('password')"></image>
                     <div class="switch" @click="switchTab" :style="{ backgroundColor: switchOn!=false?'#32c1d4':'#ccc' }">
                         <div :class="['switch-handle', switchOn!=false?'switch-on':'switch-off']"></div>
-                        <image :src="switchOn!=false?'http://192.168.2.113:8080/dist/images/switch-1_01.png':'http://192.168.2.113:8080/dist/images/switch-1_02.png'" class="switch-img"></image>
+                        <image :src="switchOn!=false?'http://192.168.2.113:1337/dist/images/switch-1_01.png':'http://192.168.2.113:1337/dist/images/switch-1_02.png'" class="switch-img"></image>
                     </div>
                   </div>
               </div>

@@ -10,7 +10,7 @@
         <div class="forms-mh30 forms-gray forms-radius">
           <div class="form">
               <div class="form-hd">
-                  <image src="http://192.168.2.113:8080/dist/images/icons-1_01.png" class="icon form-icon"></image>
+                  <image src="http://192.168.2.113:1337/dist/images/icons-1_01.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
                   <input ref="userName" class="input-text" type="text" :value="userName" placeholder="手机号/用户名" maxlength="20" @input="listenerUserName"/>
@@ -21,7 +21,7 @@
           </div>
           <div class="form">
               <div class="form-hd">
-                  <image src="http://192.168.2.113:8080/dist/images/icons-1_02.png" class="icon form-icon"></image>
+                  <image src="http://192.168.2.113:1337/dist/images/icons-1_02.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
                   <input class="input-text" :type="passwordType" :value="password" placeholder="请输入密码" maxlength="20" @input="listenerPassword"/>
@@ -31,14 +31,14 @@
                     <image src="http://app1.mindai.com/images/x-29.png" :class="[password==''?'':'form-clear', 'ng-hide']" @click="clearPassword"></image>
                     <div class="switch" :style="{ backgroundColor: switchOn!=false?'#32c1d4':'#ccc' }">
                         <div :class="['switch-handle', switchOn!=false?'switch-on':'switch-off']"></div>
-                        <image :src="switchOn!=false?'http://192.168.2.113:8080/dist/images/switch-1_01.png':'http://192.168.2.113:8080/dist/images/switch-1_02.png'" class="switch-img"></image>
+                        <image :src="switchOn!=false?'http://192.168.2.113:1337/dist/images/switch-1_01.png':'http://192.168.2.113:1337/dist/images/switch-1_02.png'" class="switch-img"></image>
                     </div>
                   </div>
               </div>
           </div>
           <div class="form" style="border-bottom-width:0;">
               <div class="form-hd">
-                  <image src="http://192.168.2.113:8080/dist/images/icons-1_03.png" class="icon form-icon"></image>
+                  <image src="http://192.168.2.113:1337/dist/images/icons-1_03.png" class="icon form-icon"></image>
               </div>
               <div class="form-bd">
                   <input class="input-text" type="text" :value="userName" placeholder="请输入验证码" maxlength="20" @input="listenerUserName"/>
@@ -50,7 +50,7 @@
         </div>
         <div class="forms-mh30 forms-gray forms-radius" style="margin-top:30px;">
             <div class="form" style="border-bottom-width:0;">
-              <div class="form-hd"><image src="http://192.168.2.113:8080/dist/images/icons-1_04.png" class="icon form-icon"></image></div>
+              <div class="form-hd"><image src="http://192.168.2.113:1337/dist/images/icons-1_04.png" class="icon form-icon"></image></div>
               <div class="form-bd">
                 <input class="input-text" type="text" placeholder="推荐人用户名/手机号（选填）" maxlength="20" bindinput="listenerInviter" :value="inviter" ng-enter=""/>
               </div>

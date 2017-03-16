@@ -9,59 +9,59 @@ const defaultParams = {
     bizContent: {}
 }
 
-
-export function fetch ({path , params , commit}) {
-  return new Promise((resolve, reject) => {
-          commit('START_LOADING');
-          stream.fetch({
-            method: 'get',
-            url: `${baseURL}/${path}.json`,
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            // headers: {'Content-Type':'application/json'},
-            // url: config.api,
-            type: 'json',
-            // body:body
-          }, (response) => {
-              console.log(response);
-              setTimeout(function () {
-                  commit('FINISH_LOADING');
-                  if (response.status == 200) {
-                      resolve(response.data)
-                  }else {
-                    reject(response)
-                  }
-              },2000)
-          }, () => {})
-  })
-}
 //
 // export function fetch ({path , params , commit}) {
-//    return new Promise((resolve, reject) => {
-//        Encrypt(params,(res) => {
-//            let body = qs.stringify(res)
-//            commit('START_LOADING');
-//            stream.fetch({
-//              method: 'POST',
-//            //   url: `${baseURL}/${path}.json`,
-//              headers: {'Content-Type':'application/x-www-form-urlencoded'},
-//            //   headers: {'Content-Type':'application/json'},
-//              url: config.api,
-//              type: 'json',
-//              body:body
-//            }, (response) => {
-//                console.log(response);
-//                setTimeout(function () {
-//                    commit('FINISH_LOADING');
-//                    if (response.status == 200) {
-//                        resolve(response.data)
-//                    }else {
-//                      reject(response)
-//                    }
-//                },2000)
-//            }, () => {})
-//        })
-//    })
-//  }
+//   return new Promise((resolve, reject) => {
+//           commit('START_LOADING');
+//           stream.fetch({
+//             method: 'get',
+//             url: `${baseURL}/${path}.json`,
+//             headers: {'Content-Type':'application/x-www-form-urlencoded'},
+//             // headers: {'Content-Type':'application/json'},
+//             // url: config.api,
+//             type: 'json',
+//             // body:body
+//           }, (response) => {
+//               console.log(response);
+//               setTimeout(function () {
+//                   commit('FINISH_LOADING');
+//                   if (response.status == 200) {
+//                       resolve(response.data)
+//                   }else {
+//                     reject(response)
+//                   }
+//               },2000)
+//           }, () => {})
+//   })
+// }
+//
+export function fetch ({path , params , commit}) {
+   return new Promise((resolve, reject) => {
+       Encrypt(params,(res) => {
+           let body = qs.stringify(res)
+           commit('START_LOADING');
+           stream.fetch({
+             method: 'POST',
+           //   url: `${baseURL}/${path}.json`,
+             headers: {'Content-Type':'application/x-www-form-urlencoded'},
+           //   headers: {'Content-Type':'application/json'},
+             url: config.api,
+             type: 'json',
+             body:body
+           }, (response) => {
+               console.log(response);
+               setTimeout(function () {
+                   commit('FINISH_LOADING');
+                   if (response.status == 200) {
+                       resolve(response.data)
+                   }else {
+                     reject(response)
+                   }
+               },2000)
+           }, () => {})
+       })
+   })
+ }
 
 export function fetchIdsByType (type) {
   return fetch(`${type}stories`)

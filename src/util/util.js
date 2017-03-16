@@ -43,7 +43,7 @@ function getLocationStorage(key) {
             if(e.result === 'success'){
                 resolve(e.data)
             }else {
-                reject(e.data)
+                resolve('')
             }
 
         })
