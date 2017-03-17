@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <div class="bank mt30 white-bg">
+        <div class="bank mt30 bgc-white">
             <div class="just-start">
-                <image :src="bankLogo" @load="imgLoad" class="logo" :style="{ width: imgWidth }" resize="contain"></image>
+                <image :src="bankLogo" @load="imgLoad" class="logo"  resize="contain"></image>
             </div>
             <div class="card">
                 <text class="card-text flex-1">6217</text>
@@ -16,7 +16,7 @@
             <text class="sub-text c-color">0.00</text>
             <text class="sub-text">元</text>
         </div>
-        <div class="padding white-bg mt30 flex-row" style="align-items:center;">
+        <div class="padding bgc-white mt30 flex-row" style="align-items:center;">
             <text style="width:140px;">提现金额</text>
             <input class="input flex-1" type="text" name="" :value="money" placeholder="请输入提现金额"/>
         </div>
@@ -87,7 +87,7 @@ module.exports = {
             },
             money:'',
             modal:false,
-            bankLogo:'http://192.168.2.113:8080/dist/images/bank/bankLogo_01.png'
+            bankLogo:'http://192.168.2.113:1337/dist/images/bank/bankLogo_01.png'
         }
     },
     created: function () {
@@ -104,26 +104,9 @@ module.exports = {
         }
     }
 };</script>
-
+<style src="../../style/base.css"></style>
 <style lang="css" scoped="">
-.container{
-    background-color: #f2f3f7;
-}
-.text-center{
-    text-align: center;
-}
-.white-bg{
-    background-color: #fff;
-}
-.mt30{
-    margin-top: 30px;
-}
-.flex-row{
-    flex-direction: row;
-}
-.flex-1{
-    flex: 1;
-}
+
 .c-color{
     color: #ff871f;
     margin-right: 0;
@@ -141,9 +124,7 @@ module.exports = {
     padding-right: 30px;
     padding-left: 30px;
 }
-.just-start{
-    justify-content: flex-start;
-}
+
 .logo{
     height: 60px;
     width: 500px;
@@ -158,33 +139,7 @@ module.exports = {
     color: #888;
     text-align: center;
 }
-.input{
-    margin-left: 10px;
-    padding-left: 10px;
-    font-size: 28px;
-    height: 80px;
-    line-height: 80px;
-}
-.button{
-    margin-top: 30px;
-    margin-left: 30px;
-    background-color:#32c1d4;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    width: 690px;
-    font-size: 40px;
-    border-radius: 10px;
-    border-width: 0;
-}
-.button:active{
-    background-color:red;
-}
-.button-text{
-    color: #fff;
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-}
+
 .sub-text{
     font-size: 24px;
     color: #888;

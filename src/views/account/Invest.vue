@@ -14,24 +14,24 @@
       </div>
       <div class="tab border-top flex-row">
           <div class="flex-1">
-              <text class="tab-nav" @click="jump('/invest/0')">全部</text>
-              <div class="tab-line" v-if="type == 'all'"></div>
+              <text class="tab-nav" @click="tabChange('0')">全部</text>
+              <div class="tab-line" v-if="invests_tab == '0'"></div>
           </div>
           <div class="flex-1">
-              <text class="tab-nav" @click="jump('/invest/1')">未还完</text>
-              <div class="tab-line" v-if="type == 'none'"></div>
+              <text class="tab-nav" @click="tabChange('1')">未还完</text>
+              <div class="tab-line" v-if="invests_tab == '1'"></div>
           </div>
           <div class="flex-1" >
-              <text class="tab-nav" @click="jump('/invest/2')">已还完</text>
-              <div class="tab-line" v-if="type == 'done'"></div>
+              <text class="tab-nav" @click="tabChange('2')">已还完</text>
+              <div class="tab-line" v-if="invests_tab == '2'"></div>
           </div>
       </div>
-      <list class="list" @loadmore="loadMoreinvests" loadmoreoffset="80">
+      <list class="list" @loadmore="loadMoreInvests" loadmoreoffset="80">
           <!-- <refresh class="refresh-view" :display="refresh_display" @refresh="fetchInvest">
               <text v-if="(refresh_display==='hide')">↓ pull to refresh</text>
               <loading-indicator class="indicator"></loading-indicator>
           </refresh> -->
-          <cell class="cell" v-for="item in invests.list" :key="item.id" append="tree">
+          <cell class="cell" v-for="item in invests.list"  append="tree">
               <div class="item">
                    <div class="item-header flex-row">
                       <text class="title flex-1">{{item.orderId}}</text>
@@ -67,51 +67,66 @@
 import {mapGetters, mapActions} from 'vuex'
 
 module.exports = {
-    props: {
-      type: {
-        type: String,
-        required: true,
-        default: 'all'
-      }
-    },
   data(){
       return {
           refresh_display:'hide',
-          loading_display:'hide'
+          loading_display:'hide',
+          projectStatus: 0
       }
   },
   created: function () {
-    this.fetchInvest();
+      if (this.$route && this.$route.params) {
+          this.status = this.$route.params.type
+      }
+      this.fetchInvest();
   },
   computed: mapGetters({
     invests: 'invests',
-    tab_cur: 'invest_tab_cur',
+    invests_tab: 'invests_tab',
     loading: 'loading'
   }),
   methods: {
-    tabChange: function (tab_cur) {
+    tabChange: function (invests_tab) {
+        var projectStatus;
+        if(invests_tab == '1'){
+            projectStatus = "5"
+        }else if(invests_tab == '2'){
+            projectStatus = "3"
+        }else {
+            projectStatus = ""
+        }
         if(!this.loading){
-            this.$store.dispatch('TAB_INVESTLIST',{
-                tab_cur:tab_cur
+            this.$store.dispatch('TAB_INVEST_LIST',{
+                projectStatus:projectStatus,
+                invests_tab:invests_tab
             }).then(() =>{
                 this.loading_display = 'hide'
+                console.log(this.invests)
             })
         }
     },
     fetchInvest() {
         this.refresh_display = 'show'
         if(!this.loading){
-            this.$store.dispatch('FETCH_INVESTLIST', {tab_cur:this.tab_cur}).then(() => {
+            this.$store.dispatch('FETCH_INVEST_LIST', {
+                invests_tab:this.invests_tab,
+                pageNum:this.invests.pageNum || "1",
+                pageSize:this.invests.pageSize || "10"
+            }).then(() => {
                 this.refresh_display = 'hide'
             })
         }
     },
-    loadMoreinvests(){
+    loadMoreInvests(){
         console.log('loadmore');
         this.loading_display = 'show'
         console.log(this.loading);
         if(!this.loading){
-            this.$store.dispatch('LOAD_MORE_INVESTLIST',{tab_cur:this.tab_cur}).then(() => {
+            this.$store.dispatch('LOAD_MORE_INVEST_LIST',{
+                projectStatus:this.invests_tab,
+                pageNum:this.invests.pageNum || "1",
+                pageSize:this.invests.pageSize || "10"
+            }).then(() => {
               this.loading_display = 'hide'
             })
         }

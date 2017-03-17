@@ -100,7 +100,7 @@ module.exports = {
 
 
 
-<style scoped="" scoped="">
+<style scoped="">
 
 .bg-inner{
   position:absolute;
@@ -216,7 +216,6 @@ module.exports = {
   font-size: 36px;
   color: #fff;
   background-color: #32c1d4;
-  height: 80px;
   padding-top: 17px;
   padding-bottom: 17px;
   margin-left: 60px;

@@ -1,5 +1,6 @@
-export function SET_PROJECTSLIST(state , { projects , lists}) {
+export function SET_PROJECT_LIST(state , { projects , lists}) {
     console.log(projects);
+    
     if(projects.code === '0000'){
         if(lists){
             state.projects.pageNum ++

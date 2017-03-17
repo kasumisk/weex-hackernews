@@ -109,11 +109,7 @@ module.exports = {
 };
 </script>
 
-
-
-
-
-<style scoped="" scoped="">
+<style scoped="">
 .bg-inner{
   position:absolute;
   top:0;
@@ -223,6 +219,7 @@ module.exports = {
   margin-right: 60px;
   margin-top: 30px;
   margin-bottom: 30px;
+  width: 630px;
   text-align: center;
   border-radius: 10px;
 }

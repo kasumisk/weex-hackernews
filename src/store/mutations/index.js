@@ -15,7 +15,7 @@ const total = {
         if(reslogin.code === '0000'){
             state.login = true
             state.sessionId = reslogin.data.sessionId
-            util.setLocationStroage('sessionId',reslogin.data.sessionId)
+            util.setLocationStorage('sessionId',reslogin.data.sessionId)
         }
     }
 }

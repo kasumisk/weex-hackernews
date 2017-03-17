@@ -10,7 +10,7 @@ import IndexView from './views/Index.vue'
 import AccountView from './views/Account.vue'
 import MoreView from './views/More.vue'
 //account
-import CachView from './views/account/Cash.vue'
+import CashView from './views/account/Cash.vue'
 import RechargeView from './views/account/Recharge.vue'
 import InvestView from './views/account/Invest.vue'
 // import RedpacketView from './views/account/Redpacket.vue'
@@ -54,18 +54,16 @@ export default new Router({
     { path: '/article/:url(.*)?', component: ArticleView },
     { path: '/item/:id(\\d+)', component: CommentView },
     { path: '/users/:id', component: UserView },
-    // { path: '/', redirect: '/account' },
+    // { path: '/', redirect: '/invest' },
     // tabbar
     { path: '/', component: IndexView },
     { path: '/more', component: MoreView },
     { path: '/account', component: AccountView },
     { path: '/web/:url(.*)?', component: webView },
     // account
-    { path: '/cach', component: CachView },
+    { path: '/cash', component: CashView },
     { path: '/recharge', component: RechargeView },
-    { path: '/invest/0', component: createInvestView("all") },
-    { path: '/invest/1', component: createInvestView("none") },
-    { path: '/invest/2', component: createInvestView("done") },
+    { path: '/invest', component: InvestView },
     // { path: '/redpacket', component: RedpacketView },
     // user
     { path: '/user/register', component: UserRegisterView },

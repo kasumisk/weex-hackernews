@@ -70,7 +70,7 @@
             </div>
 
             <div class="cells cell-main cells-hasIcon mt30 bgc-white">
-                <div class="cell-access flex flex-center" @click="jump('/invest/0')" style="border-bottom-width:2px; border-bottom-style:solid;border-bottom-color:#e6e6e6;">
+                <div class="cell-access flex flex-center" @click="jump('/invest')" style="border-bottom-width:2px; border-bottom-style:solid;border-bottom-color:#e6e6e6;">
                     <div class="cell-hd">
                         <image class="cell-icon icon-rmb" src="http://192.168.2.113:1337/dist/images/icon-rmb.png" style="width:34px;height:42px;"></image>
                     </div>
@@ -204,40 +204,10 @@ import util from '../util/util.js'
     }
 };
 </script>
-
-
+<style src="../style/base.css"></style>
 <style lang="css" scoped="">
-.container{
-  background-color: #f2f3f7;
-}
-.bgc-white{
-  background-color: #fff;
-}
-.flex-row{
-    flex-direction: row;
-}
-.flex-1{
-    flex: 1;
-}
-.border-top{
-    border-top-width:1px;
-    border-top-color: #ccc;
-    border-top-style: solid;
-}
-.line{
-    height: 36px;
-    width: 1px;
-    background-color: #ccc;
-}
-.flex-center{
-  align-items: center;
-}
-.just-center{
-    justify-content: center;
-}
-.text-center{
-    text-align: center;
-}
+
+
 .cell-access{
   padding-top: 30px;
   padding-right: 20px;
@@ -256,9 +226,7 @@ import util from '../util/util.js'
   width:40px;
   height: 40px;
 }
-.mt30{
-  margin-top: 30px;
-}
+
 .sub-info{
   font-size: 24px;
   margin-top: 10px;

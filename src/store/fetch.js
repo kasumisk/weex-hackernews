@@ -91,11 +91,23 @@ export function fetchAccount({commit,sessionId}) {
     return fetch({path:`investorAccount`,params,commit})
 }
 
-export function fetchInvest({commit}) {
-    return fetch({path:`investList`,commit})
+export function fetchInvest({commit},{ pageNum , pageSize , projectStatus}) {
+    let params = {
+        method: 'user.investList',
+        v: '1.0',
+        bizContent: {
+            pageNum: pageNum,
+            pageSize: pageSize,
+
+        }
+    };
+    if(projectStatus != '0'){
+        params.bizContent["projectStatus"] = projectStatus
+    }
+    return fetch({path:`investList`,params,commit})
 }
 
-export function fetchprojects({commit},{pageNum,pageSize}){
+export function fetch_projects({commit},{pageNum,pageSize}){
     let params = {
             method: 'general.projectsList',
             v: '1.0',

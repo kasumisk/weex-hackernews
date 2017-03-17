@@ -22,7 +22,7 @@ let config = {
     }
 }
 
-function setLocationStroage(key,value) {
+function setLocationStorage(key,value) {
     return new Promise((resolve, reject) => {
         storage.setItem(key,value,(e) =>{
             if(e.result === 'success'){
@@ -94,7 +94,7 @@ function Encrypt(options,callback) {
     console.log('内容:',config);
 
     getLocationStorage("sessionId").then((sessionId)=>{
-        console.log('bizContent:',config.data.bizContent);
+        console.log('sessionId:',sessionId);
         let bizContent = aesEncrypt(JSON.stringify(config.data.bizContent), config.appKeySecret, config.appKeySecret),
             signStr = config.appKeySecret + 'appKey' + config.appKey + 'bizContent' + bizContent + 'formatjsonlocalecnmethod' + config.data.method + 'sessionId' + sessionId + 'timestamp' + config.timestamp + 'v' + config.data.v + config.appKeySecret,
             sign = CryptoJS.SHA1(signStr).toString().toUpperCase()
@@ -116,11 +116,6 @@ function Encrypt(options,callback) {
 
 }
 
-function ajax(options, noReturn) {
-
-
-
-}
 /**
  * 处理金额格式，示例123456789==>123,456,789
  * @param  {[type]} money [description]
@@ -351,6 +346,6 @@ module.exports = {
     Encrypt,
     getBJTime,
     config,
-    setLocationStroage,
+    setLocationStorage,
     getLocationStorage
 };

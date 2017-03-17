@@ -5,6 +5,7 @@ import store from './store'
 import { sync } from 'vuex-router-sync'
 import * as filters from './filters'
 import mixins from './mixins'
+import weexNavigator from 'weex-vue-navigator'
 
 // sync the router with the vuex store.
 // this registers `store.state.route`
@@ -18,6 +19,9 @@ Object.keys(filters).forEach(key => {
 // register global mixins.
 Vue.mixin(mixins)
 
+//router app
+Vue.use(weexNavigator, {router})
+
 // create the app instance.
 // here we inject the router and store to all child components,
 // making them available everywhere as `this.$router` and `this.$store`.
@@ -30,3 +34,6 @@ router.beforeEach((to, from, next) => {
   next();
 });
 router.push('/')
+
+weexNavigator.bootstrap();
+

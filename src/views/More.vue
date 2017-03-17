@@ -157,10 +157,6 @@ module.exports = {
 </script>
 
 <style scoped="">
-.container {
-    background-color: #f5f5f5;
-    position: absolute;
-}
 
 .mr25 {
     margin-right: 25px;
