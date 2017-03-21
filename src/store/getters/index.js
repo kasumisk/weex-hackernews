@@ -1,6 +1,7 @@
-import * as account from './account.js'
-import * as invests from './invests.js'
+import * as user from './user.js'
 import * as projects from './projects.js'
+
+
 
 const total = {
     clientHeight(state) {
@@ -10,10 +11,10 @@ const total = {
         return state.loading;
     },
     loginStatus(state){
-
+        return state.login
     }
 }
 
-const getters = Object.assign({}, total,account, invests, projects);
+const getters = Object.assign({}, total,user, projects);
 
 export default getters

@@ -13,7 +13,7 @@ import MoreView from './views/More.vue'
 import CashView from './views/account/Cash.vue'
 import RechargeView from './views/account/Recharge.vue'
 import InvestView from './views/account/Invest.vue'
-// import RedpacketView from './views/account/Redpacket.vue'
+import RedpacketView from './views/account/Redpacket.vue'
 //user
 import UserRegisterView from './views/user/Register.vue'
 import UserLoginView from './views/user/Login.vue'
@@ -54,8 +54,8 @@ export default new Router({
     { path: '/article/:url(.*)?', component: ArticleView },
     { path: '/item/:id(\\d+)', component: CommentView },
     { path: '/users/:id', component: UserView },
-    // { path: '/', redirect: '/invest' },
-    // tabbar
+    // { path: '/', redirect: '/redpacket' },
+    // nav
     { path: '/', component: IndexView },
     { path: '/more', component: MoreView },
     { path: '/account', component: AccountView },
@@ -64,7 +64,7 @@ export default new Router({
     { path: '/cash', component: CashView },
     { path: '/recharge', component: RechargeView },
     { path: '/invest', component: InvestView },
-    // { path: '/redpacket', component: RedpacketView },
+    { path: '/redpacket', component: RedpacketView },
     // user
     { path: '/user/register', component: UserRegisterView },
     { path: '/user/login', component: UserLoginView },

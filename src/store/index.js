@@ -31,13 +31,21 @@ const store = new Vuex.Store({
             invests:[{
                 list:[],
                 pageNum:"1",
-                pageSize:"20",
+                pageSize:"10",
                 totalNum:'',
                 totalAmount:'0',
                 totalInterest:'0'
             }],
             invests_tab: "0",
-            redPacket:[]
+            redPacket:[{
+                list:[],
+                pageNum:"1",
+                pageSize:"10",
+                totalNum:'',
+                totalAmount:'0',
+                totalInterest:'0'
+            }],
+            redPacket_tab: "0"
         },
         clientHeight:config.clientHeight,
         projects: {

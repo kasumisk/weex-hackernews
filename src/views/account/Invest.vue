@@ -118,12 +118,26 @@ module.exports = {
         }
     },
     loadMoreInvests(){
+        var projectStatus;
+        switch (this.invests_tab){
+            case "1":
+                projectStatus = "5";
+                break;
+            case "2":
+                projectStatus = "3";
+                break;
+            default:
+                projectStatus = "";
+                break;
+        }
+
         console.log('loadmore');
         this.loading_display = 'show'
         console.log(this.loading);
         if(!this.loading){
             this.$store.dispatch('LOAD_MORE_INVEST_LIST',{
-                projectStatus:this.invests_tab,
+                projectStatus:projectStatus,
+                invests_tab:this.invests_tab,
                 pageNum:this.invests.pageNum || "1",
                 pageSize:this.invests.pageSize || "10"
             }).then(() => {

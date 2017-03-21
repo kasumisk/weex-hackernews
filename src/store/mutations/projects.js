@@ -1,6 +1,4 @@
 export function SET_PROJECT_LIST(state , { projects , lists}) {
-    console.log(projects);
-    
     if(projects.code === '0000'){
         if(lists){
             state.projects.pageNum ++
@@ -10,7 +8,6 @@ export function SET_PROJECT_LIST(state , { projects , lists}) {
         }else {
             state.projects.pageNum = 1
             state.projects.list = projects.data.list
-            console.log(state.projects.list);
         }
     }
 

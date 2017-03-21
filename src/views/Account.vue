@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="cells cell-main cells-hasIcon bgc-white">
-                <div class="cell-access flex flex-center" href="http://192.168.2.113:1337/dist/account/redpacket.js">
+                <div class="cell-access flex flex-center" @click="jump('/redpacket')">
                     <div class="cell-hd">
                         <image class="cell-icon icon-repacket" src="http://192.168.2.113:1337/dist/images/icon-repacket.png" style="width:34px;height:42px;"></image>
                     </div>
@@ -146,9 +146,7 @@
 
 
 <script>
-// var storage = require('@weex-module/storage');
-// var stream = require('@weex-module/stream');
-// var util = require('../utils/util.js');
+
  import {
     mapGetters,
     mapActions
@@ -182,22 +180,23 @@ import util from '../util/util.js'
 
     created() {
         // this.login = true;
-        var _this = this;
-        _this.fetchAccount(false,this.sessionId);
+        this.fetchAccount(false);
         // util.getLocationStorage('sessionId').then((res) =>{
         //     _this.sessionId = res
         // })
-    //     modal.toast({
-    //      message: 'This is a toast',
-    //      duration: 0.3
-    //    })
+        //     modal.toast({
+        //      message: 'This is a toast',
+        //      duration: 0.3
+        //    })
     },
     methods: {
-        fetchAccount(boolean , sessionId ) {
-            if(!this.loading && !this.account.userId || boolean){
+        fetchAccount(boolean) {
+            if(!this.loading && !this.account.userName || boolean){
                 console.log('加载');
-                this.$store.dispatch('FETCH_ACCOUNT', {sessionId}).then(() => {
-
+                this.$store.dispatch('FETCH_ACCOUNT').then(() => {
+                    if(!this.$store.getters.loginStatus){
+                        this.$router.push('/user/login')
+                    }
                 })
             }
         }

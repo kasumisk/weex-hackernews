@@ -89,12 +89,9 @@ function Encrypt(options,callback) {
 
     let config1 = Object.assign({}, config.data, options);
     config.data = config1;
-
-    console.log('配置:',options);
-    console.log('内容:',config);
-
+    // console.log('配置:',options);
+    // console.log('内容:',config);
     getLocationStorage("sessionId").then((sessionId)=>{
-        console.log('sessionId:',sessionId);
         let bizContent = aesEncrypt(JSON.stringify(config.data.bizContent), config.appKeySecret, config.appKeySecret),
             signStr = config.appKeySecret + 'appKey' + config.appKey + 'bizContent' + bizContent + 'formatjsonlocalecnmethod' + config.data.method + 'sessionId' + sessionId + 'timestamp' + config.timestamp + 'v' + config.data.v + config.appKeySecret,
             sign = CryptoJS.SHA1(signStr).toString().toUpperCase()

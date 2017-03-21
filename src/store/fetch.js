@@ -52,12 +52,12 @@ export function fetch ({path , params , commit}) {
                console.log(response);
                setTimeout(function () {
                    commit('FINISH_LOADING');
-                   if (response.status == 200) {
+                   if (response.status == 200 ) {
                        resolve(response.data)
                    }else {
                      reject(response)
                    }
-               },2000)
+               },500)
            }, () => {})
        })
    })
@@ -82,7 +82,7 @@ export function fetchUser (id) {
 
 //发起请求
 
-export function fetchAccount({commit,sessionId}) {
+export function fetchAccount({commit}) {
     let params = {
             method: 'user.investorAccount',
             v: '1.0',
@@ -106,6 +106,23 @@ export function fetchInvest({commit},{ pageNum , pageSize , projectStatus}) {
     }
     return fetch({path:`investList`,params,commit})
 }
+
+
+export function fetchRedPacket({commit},{ pageNum , pageSize , status}) {
+    var params = {
+        method: 'user.myRedPacket',
+        v: '1.3',
+        bizContent: {
+            status:status,
+            pageNum:pageNum || '1',
+            pageSize:pageSize || '10'
+        }
+    };
+   
+    return fetch({path:`fetchRedPacket`,params,commit})
+}
+
+
 
 export function fetch_projects({commit},{pageNum,pageSize}){
     let params = {

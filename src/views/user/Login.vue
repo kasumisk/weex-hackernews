@@ -80,9 +80,13 @@ module.exports = {
         login: function () {
             if(!this.loading){
                 this.$store.dispatch('LOGIN_ACTION',{userName:this.userName,password:this.password}).then(() => {
-                    util.getLocationStorage('sessionId').then((res)=>{
-                        console.log(res);
-                    })
+                    if(this.$store.getters.loginStatus){
+                     this.$router.push('/account');
+                    }
+//                    util.getLocationStorage('sessionId').then((res)=>{
+//                        console.log(res);
+//
+//                    })
                 })
             }
         },

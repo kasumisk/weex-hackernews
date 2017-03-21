@@ -1,367 +1,236 @@
 <template>
-    <div class="controller redPacket">
-        <div class="count">
-            <div class="count-list ">
-                <text class="white-text text-center">未使用</text>
-                <text class="count-money white-text text-center">{{unavailableAmount}}</text>
+    <div class="container">
+        <div class="count flex-row">
+            <div class="flex-1">
+                <text class="main-sub-text text-center">未使用</text>
+                <text class="color-blue text-center">{{redPacket.unavailableAmount}}</text>
+
             </div>
-            <div class="count-line"></div>
-            <div class="count-list sp white-text">
-                <text class="white-text text-center">已使用</text>
-                <text class="count-money white-text text-center">{{availableAmount}}</text>
-            </div>
-        </div>
-        <div class="tab">
-            <div class="tab-nav white-text" @click="tabChange" status="0">
-                <text class="tab-nav white-text">未使用</text>
-                <div class="tab-line" v-if="status == 0 "></div>
-            </div>
-            <div class="tab-nav white-text" @click="tabChange" status="1">
-                <text class="tab-nav white-text">已使用</text>
-                <div class="tab-line" v-if="status == 1"></div>
-            </div>
-            <div class="tab-nav white-text" @click="tabChange" status="2">
-                <text class="tab-nav white-text">已过期</text>
-                <div class="tab-line" v-if="status == 2"></div>
+            <div class="line"></div>
+            <div class="flex-1">
+                <text class="main-sub-text text-center">已使用</text>
+                <text class="color-blue text-center">{{redPacket.availableAmount}}</text>
             </div>
         </div>
-        <list class="list">
-           <cell class="cell" loadmore="getData" v-for="lists" :index="$index">
-                <div class="hd flexCenter">
-                    <image class="circle_right" src="http://192.168.2.113:8080/dist/images/circle_right.png" resize="cover"></image>
-                    <image class="circle_left" src="http://192.168.2.113:8080/dist/images/circle_left.png" resize="cover"></image>
-                    <div class="money">
-                        <text class="fz12">￥</text>
-                        <text ng-class="{fz20:smallfz}" class="fz30">{{surplusAmountInt}}</text>
-                        <text class="fz15">.</text>
-                        <text class="fz15">{{surplusAmountFloat}}</text>
-                    </div>
-                    <div class="info">
-                        <text class="title">{{projectName}}</text>
-                        <div class="psInfo">
-                            <div ng-show="limitAmountHide">
-                               <text ng-bind="limitAmount">• 投资总额{{limitAmount}}元及以上可以使用</text>
-                            </div>
-                            <div v-if="trem == 3">
-                              <text class="sub-info-text">• 投资{{minTerm}}－{{maxTerm}}天的项目可使用</text>
-                            </div>
-                            <div v-if="trem == 2">
-                              <text class="sub-info-text">• 投资{{minTerm}}天以上的项目可使用</text>
-                            </div>
-                            <div v-if="trem == 1">
-                              <text class="sub-info-text">• 投资{{maxTerm}}天以下的项目可使用</text>
-                            </div>
+        <div class="tab border-top flex-row">
+            <div class="flex-1">
+                <text class="tab-nav" @click="tabChange('0')">可使用</text>
+                <div class="tab-line" v-if="redPacket_tab == '0'"></div>
+            </div>
+            <div class="flex-1">
+                <text class="tab-nav" @click="tabChange('1')">已使用</text>
+                <div class="tab-line" v-if="redPacket_tab == '1'"></div>
+            </div>
+            <div class="flex-1" >
+                <text class="tab-nav" @click="tabChange('2')">已过期</text>
+                <div class="tab-line" v-if="redPacket_tab == '2'"></div>
+            </div>
+        </div>
+        <list class="list" @loadmore="loadMoreInvests" loadmoreoffset="80">
+            <!-- <refresh class="refresh-view" :display="refresh_display" @refresh="fetchInvest">
+                <text v-if="(refresh_display==='hide')">↓ pull to refresh</text>
+                <loading-indicator class="indicator"></loading-indicator>
+            </refresh> -->
+            <cell class="cell" v-for="item in redPacket.list"  append="tree">
+                <div class="item">
+                    <div class="item-body flex-row">
+                        <div class="cash">
+                            <text class="main-sub-text">¥</text>
+                            <text class="main-text">{{item.amount}}</text>
+                            <text class="main-sub-text">.00</text>
+                        </div>
+                        <div class="flex-1">
+                            <text class="main-text">{{item.title}}</text>
+                            <text class="main-sub-text" v-if="item.limitAmountHide"> • 投资总额 {{item.limitAmount}}元及以上可以使用</text>
+                            <text class="main-sub-text" v-if="item.trem == 3"> • 投资 {{item.minTerm}}－{{item.maxTerm}}元的可以使用</text>
+                            <text class="main-sub-text" v-if="item.trem == 2"> • 投资 {{item.minTerm}}元及以上可以使用</text>
+                            <text class="main-sub-text" v-if="item.trem == 1"> • 投资 {{item.maxTerm}}元及以下可以使用</text>
                             <div class="flex-row">
-                              <text class="sub-info-text">抵扣金额＝本金 x {{lever}} %</text><text v-if="isAnnualize == 1">x 天数／360</text>
+                                <text class="main-sub-text"> 抵扣金额＝本金 x  {{item.lever}}% </text>
+                                <text class="main-sub-text" v-if="item.isAnnualize == 1"> x 天数／360 </text>
                             </div>
-                            <div>
-                              <text>总额{{totalAmount}}，{{timedesc}}</text>
-                            </div>
+                            <text class="main-sub-text"> 总额 {{item.totalAmount}}，{{item.timedesc}}</text>
                         </div>
                     </div>
-                    <!-- <div ng-show="startStatus == true" class="choose"></div> -->
-                </div>
-                <div class="ft">
-                    <div class="time">
-                        <div v-if="have == 1" class="fl"><text class="text-left grev">{{startTime}}&nbsp;生效</text></div>
-                        <div v-if="status == 1" class="fr"><text class="text-right grev">{{useTime}}已使用</text></div>
-                        <div v-if="status == 2" class="fr"><text class="text-right grev">{{endTime}}已失效</text></div>
-                        <div v-if="status == 3" class="fr"><text class="text-right grev">{{endTime}}已过期</text></div>
-                        <div v-if="status == 4" class="fr"><text class="text-right grev">{{endTime}}&nbsp;失效</text></div>
+                    <div class="item-footer">
+                        <text class="time">如投资12个月项目≥10,000元可一次性用完</text>
                     </div>
-                    <text class="ps grev text-left">{{from}}</text>
                 </div>
             </cell>
+            <loading class="loading-view" :display="loading_display">
+                <text v-if="(loading_display==='hide')">↑ Loadmore</text>
+                <loading-indicator class="indicator"></loading-indicator>
+            </loading>
+            <!-- <div class="loading" v-if="loading">
+              <text class="loading-text">loading ...</text>
+            </div> -->
         </list>
     </div>
-
 </template>
 
 <script>
-var storage = require('@weex-module/storage');
-var stream = require('@weex-module/stream');
-var util = require('../utils/util.js');
-module.exports = {
-  props: {
-    unavailableAmount: {
-      default: 0.00
-    },
-    availableAmount: {
-      default: 0.00
-    },
-    userInfo: {
-      default: function () {
-        return {};
-      }
-    },
-    showLoading: {
-      default: false
-    },
-    status: {
-      default: 0
-    },
-    isLogin: {
-      default: false
-    },
-    deviceWidth: {
-      default: ''
-    },
-    pageNum: {
-      default: 1
-    },
-    pageSize: {
-      default: 10
-    },
-    lists: {
-      default: function () {
-        return [];
-      }
-    },
-    noData: {
-      default: false
-    }
-  },
-  init: function () {
-    // 页面初始化 options为页面跳转所带来的参数
-  },
-  created: function () {
-    this.getData();
-  },
-  ready: function () {},
-  methods: {
-    checkLogin: function () {
-      let self = this;
-      var sessionId = storage.getItem("sessionId");
-      if (sessionId && sessionId.length != 0) {
-        self.isLogin = true;
-        self.getInitData();
-        // 页面初始化 options为页面跳转所带来的参数
-      }
-    },
-    tabChange: function (e) {
-      this.status = e.target.attr.status;
-    },
-    getData: function () {
-      var _this = this;
-      stream.fetch({
-        url: util.config.api + "myRedPacket",
-        method: util.config.method,
-        body: "",
-        type: 'json',
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded'
-        }
-      }, function (res) {
-        _this.unavailableAmount = 10;
-        _this.availableAmount = 100;
-        var list = res.data.data.list;
-        var nowTime = new Date().getTime();
-        for (var i = 0; i < list.length; i++) {
-          if (list[i].time == 0) {
-            list[i].timedesc = '可多次累计使用';
-          } else {
-            list[i].timedesc = '可使用' + list[i].time + '次';
-          }
-          if (list[i].type == 1) {
-            list[i].title = '抵扣红包';
-          } else if (list[i].type == 2) {
-            list[i].title = '加息红包';
-          }
+    import {mapGetters, mapActions} from 'vuex'
 
-          var startTime = new Date(list[i].startTime.replace(/-/g, "/")).getTime();
-          var end = new Date(list[i].endTime.replace(/-/g, "/")).getTime();
-
-          if (nowTime > startTime && _this.status == 0) {
-            list[i].startStatus = true;
-          }
-          //时间显示状态
-          if (list[i].surplusAmount == 0 || list[i].surplusAmount != list[i].totalAmount && nowTime < end && _this.status == 1) {
-            list[i].status = 1; //已使用
-          } else if (list[i].surplusAmount > 0 && nowTime > end && _this.status == 1) {
-            list[i].status = 2; //已失效
-          } else if (nowTime > end) {
-            list[i].status = 3; //已过期
-          } else if (_this.status == 0) {
-            list[i].status = 4; //失效
-          }
-
-          if (nowTime < startTime && _this.status == 0) {
-            list[i].have = 1; //生效显示
-          } else {
-            list[i].have = 0; //生效不显示
-          }
-
-          if (list[i].minTerm == '0' && list[i].maxTerm == '0') {
-            list[i].trem = 0;
-          } else if (list[i].minTerm == '0' && list[i].maxTerm != '0') {
-            list[i].trem = 1;
-          } else if (list[i].minTerm != '0' && list[i].maxTerm == '0') {
-            list[i].trem = 2;
-          } else {
-            list[i].trem = 3;
-          }
-
-          list[i].limitAmountHide = function () {
-            var num = Number(list[i].limitAmount);
-            if (num == 100 || num == 0) {
-              return false;
-            } else {
-              return true;
+    module.exports = {
+        data(){
+            return {
+                refresh_display:'hide',
+                loading_display:'hide',
+                projectStatus: 0
             }
-          }();
+        },
+        created: function () {
+            this.fetchRedPacket();
+        },
 
-          if (_this.status == 1) {
-            list[i].surplusAmountInt = (list[i].totalAmount - list[i].surplusAmount).toFixed(2).toString().split('.')[0];
-            list[i].surplusAmountFloat = Number(list[i].totalAmount - list[i].surplusAmount).toFixed(2).toString().split('.')[1] || '00';
-          } else {
-            list[i].surplusAmountInt = list[i].surplusAmount.toString().split('.')[0];
-            list[i].surplusAmountFloat = Number(list[i].surplusAmount).toFixed(2).toString().split('.')[1] || '00';
-          }
+        computed: mapGetters({
+            redPacket: 'redPacket',
+            redPacket_tab: 'redPacket_tab',
+            loading: 'loading'
+        }),
+        methods: {
+            tabChange: function (redPacket_tab) {
+                if(!this.loading){
+                    this.$store.dispatch('TAB_RED_PACKET_LIST',{
+                        status:redPacket_tab
+                    }).then(() =>{
+                        this.loading_display = 'hide'
+                        console.log(this.$store.getters.redPacket_tab)
+                })
+                }
+            },
+            fetchRedPacket() {
+                this.refresh_display = 'show'
+                if(!this.loading){
+                    this.$store.dispatch('FETCH_RED_PACKET_LIST', {
+                        status:this.redPacket_tab,
+                        pageNum:this.redPacket.pageNum || "1",
+                        pageSize:this.redPacket.pageSize || "10"
+                    }).then(() => {
+                        this.refresh_display = 'hide'
+                        console.log(this.$store.getters.redPacket)
+                })
+                }
+            },
+            loadMoreInvests(){
+                var projectStatus;
+                switch (this.invests_tab){
+                    case "1":
+                        projectStatus = "5";
+                        break;
+                    case "2":
+                        projectStatus = "3";
+                        break;
+                    default:
+                        projectStatus = "";
+                        break;
+                }
 
-          if (list[i].surplusAmountInt.length >= 4) {
-            list[i].smallfz = true;
-          }
+                console.log('loadmore');
+                this.loading_display = 'show'
+                console.log(this.loading);
+                if(!this.loading){
+                    this.$store.dispatch('LOAD_MORE_INVEST_LIST',{
+                        projectStatus:projectStatus,
+                        invests_tab:this.invests_tab,
+                        pageNum:this.invests.pageNum || "1",
+                        pageSize:this.invests.pageSize || "10"
+                    }).then(() => {
+                        this.loading_display = 'hide'
+                })
+                }
+            }
         }
-        _this.lists = list;
-        console.log(_this.lists);
-        if (_this.pageNum == 1) {
-          _this.pageNum += 1;
-          _this.lists = res.data.data.list;
-          _this.totalPage = 60;
-        } else {
-          _this.pageNum += 1;
-          _this.lists = _this.data.list.concat(res.data.data.list);
-          _this.totalPage = 60;
-        }
-      });
-    }
-  }
-};</script>
+    };
+</script>
 
 <style lang="css" scoped="">
-.container{
-    background-color: #f2f3f7;
-}
-.text-center{
-    text-align: center;
-}
-.text-right{
-    text-align: right;
-}
-.text-left{
-    text-align: left;
-}
-.flex-row{
-    flex-direction: row;
-}
-.grev{
-    color: #888;
-}
-.count{
-    background-color: #32c1d4;
-    flex-direction: row;
-    align-items: center;
-}
-.count-line{
-    width: 1px;
-    height:90px;
-    background-color: #fff;
-}
-.count-list{
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    flex:1;
-    text-align: center;
-}
-.count-money{
-    font-size: 36px;
-    line-height: 50px;
-}
-.white-text{
-    color: #fff;
-}
-.tab{
-    height: 70px;
-    background-color: #32c1d4;
-    border-top-color: #fff;
-    border-top-width: 1px;
-    border-top-style: solid;
-    flex-direction: row;
-}
-.tab-nav{
-    flex: 1;
-    font-size: 30px;
-    text-align: center;
-    padding-top: 6px;
-}
-.tab-line{
-    position: absolute;
-    bottom:0;
-    height: 5px;
-    background-color: #fff;
-    width: 100px;
-    margin-left: 75px;
-}
-.list{
+    .count{
+        padding-top: 60px;
+        padding-bottom: 60px;
+        background-color: #fff;
+    }
+    .color-blue{
+        color: #32c1d4;
+        font-size: 32px;
+    }
+    .tab{
+        background-color: #fff;
+    }
+    .tab-nav{
+        text-align: center;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    .tab-line{
+        height: 5px;
+        background-color: #32c1d4;
+        width: 100px;
+        margin-left: 75px;
+    }
+    .main-sub-text{
+        font-size: 24px;
+        color: #888;
+    }
+    .item {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: #fff;
+        margin-top: 30px;
+    }
+    .item-header{
+        justify-content: space-between;
+    }
+    .item-body{
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+    .cash{
+        color: red;
+        width: 160px;
+    }
 
-}
-.cell{
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #fff;
-}
-.circle_right{
-    height: 32px;
-    width: 16px;
-    position: absolute;
-    bottom: -16px;
-    right: 0;
-}
-.circle_left{
-    height: 32px;
-    width: 16px;
-    position: absolute;
-    bottom: -16px;
-    left: 0;
-}
-.hd{
-    align-items: center;
-    padding-top: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    flex-direction: row;
-}
-.ft{
-    padding-top: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #fafafa;
-}
-.money{
-    width: 180px;
-    flex-direction: row;
-}
-.info{
-    flex: 1;
-}
-.title{
-    font-size: 32px;
-    font-weight: bold;
-}
-.psInfo{
-    margin-top: 30px;
-}
-.text{
-    color: #666;
-}
+
+    .refresh-view {
+        width: 750;
+        height: 100;
+        display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+    .loading-view {
+        width: 750;
+        height: 100;
+        display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .indicator {
+        height: 60;
+        width: 60;
+        color: #889967;
+    }
+
+    /*.indicator {
+       height: 40;
+       width: 40;
+       color:#45b5f0;
+     }*/
+
+    .refresh-arrow {
+        font-size: 30px;
+        color: #45b5f0;
+    }
+
 </style>

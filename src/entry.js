@@ -30,7 +30,6 @@ new Vue(Vue.util.extend({ el: '#root', router, store }, App))
 
 //路由拦截器
 router.beforeEach((to, from, next) => {
-  console.log(from)
   next();
 });
 router.push('/')
