@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Header :title="title"></Header>
     <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px;height:573px;" resize= "cover"></image>
     <div class="bg-inner">
         <div class="justify-center">
@@ -50,6 +51,7 @@ import {
 } from 'vuex'
 
 import util from '../../util/util.js'
+import Header from '../../components/app-header.vue'
 module.exports = {
     // props: {
     //     userName: {
@@ -61,8 +63,12 @@ module.exports = {
     //         default: ''
     //     }
     // },
+    components: {
+        Header
+    },
     data(){
         return{
+            title:'登录',
             userName:'',
             password:'',
             passwordType:'password',
@@ -116,7 +122,7 @@ module.exports = {
 <style scoped="">
 .bg-inner{
   position:absolute;
-  top:0;
+  top:120px;
   left:0;
   width: 750px;
   min-height: 660px;

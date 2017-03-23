@@ -20,8 +20,14 @@ import UserLoginView from './views/user/Login.vue'
 // import UserInfoView from './views/user/Info.vue'
 // depositary
 import depositaryRegView from './views/depositary/Register.vue'
+//project
+import ProjectView from './views/project/Project.vue'
+
+
 
 import webView from './views/web.vue'
+
+
 
 Vue.use(Router)
 
@@ -71,5 +77,6 @@ export default new Router({
     // { path: '/user/info', component: AccountView },
     // depositary
     { path: '/depositary/register', component: depositaryRegView },
+    { path: '/project/:id', component: ProjectView , props:true}
   ]
 })

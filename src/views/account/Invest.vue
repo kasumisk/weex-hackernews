@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+      <Header :title="title"></Header>
       <div class="count flex-row">
           <div class="flex-1">
               <text class="main-sub-text text-center">累计已投</text>
@@ -65,10 +66,15 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import Header from '../../components/app-header.vue'
 
 module.exports = {
+  components: {
+      Header
+  },
   data(){
       return {
+          title:'项目投资',
           refresh_display:'hide',
           loading_display:'hide',
           projectStatus: 0

@@ -98,7 +98,6 @@ export function fetchInvest({commit},{ pageNum , pageSize , projectStatus}) {
         bizContent: {
             pageNum: pageNum,
             pageSize: pageSize,
-
         }
     };
     if(projectStatus != '0'){
@@ -124,7 +123,7 @@ export function fetchRedPacket({commit},{ pageNum , pageSize , status}) {
 
 
 
-export function fetch_projects({commit},{pageNum,pageSize}){
+export function fetchProjects({commit},{pageNum,pageSize}){
     let params = {
             method: 'general.projectsList',
             v: '1.0',
@@ -136,8 +135,21 @@ export function fetch_projects({commit},{pageNum,pageSize}){
     return fetch({path:`projects`,params,commit})
 }
 
+export function fetchProject({commit},{ projectId }){
+    console.log('fetchProject')
+    let params = {
+        method: 'general.projectDetail',
+        v: '1.2',
+        bizContent: {
+            projectId:projectId
+        }
+    }
+    return fetch({path:`projects`,params,commit})
+}
 
-export function fetch_login({commit},{userName,password}) {
+
+
+export function login({commit},{userName,password}) {
     let params = {
                 method: 'user.login',
                 v: '1.0',

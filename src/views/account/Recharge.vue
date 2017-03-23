@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Header :title="title"></Header>
         <div class="bank mt30 bgc-white">
             <div class="just-start">
                 <image :src="bankLogo" @load="imgLoad" class="logo" resize="contain"></image>
@@ -61,13 +62,14 @@
 </template>
 
 <script>
-
+    import Header from '../../components/app-header.vue'
 module.exports = {
     components: {
-        // wxcButton: require('weex-vue-components/button.vue')
+        Header
     },
     data(){
         return {
+            title:'充值',
             userInfo:{
                 userName: '',
                 userId: '',

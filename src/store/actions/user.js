@@ -2,7 +2,7 @@ import { fetchInvest ,fetchAccount , fetchRedPacket} from '../fetch'
 
 
 //账户信息
-export function FETCH_ACCOUNT({commit, dispatch, state}) {
+export function FETCH_ACCOUNT({commit, state}) {
     return fetchAccount({ commit })
         .then( account => commit("SET_ACCOUNT",{ account }))
 }
@@ -14,7 +14,7 @@ export function FETCH_INVEST_LIST({commit, dispatch, state},{pageNum,pageSize,in
 }
 
 
-export function TAB_INVEST_LIST({commit, dispatch, state},{pageNum,pageSize,projectStatus,invests_tab}){
+export function TAB_INVEST_LIST({commit, state},{pageNum,pageSize,projectStatus,invests_tab}){
     if(!state.user.invests[invests_tab]){
         return fetchInvest({ commit },{pageNum,pageSize,projectStatus})
             .then( invests => commit("SET_INVEST_LIST",{ invests ,invests_tab}))
@@ -24,19 +24,19 @@ export function TAB_INVEST_LIST({commit, dispatch, state},{pageNum,pageSize,proj
     }
 }
 
-export function LOAD_MORE_INVEST_LIST({commit, dispatch ,getters},{pageNum,pageSize,projectStatus}){
+export function LOAD_MORE_INVEST_LIST({commit ,getters},{pageNum,pageSize,projectStatus}){
     return fetchInvest({ commit },{pageNum,pageSize,projectStatus})
         .then( invests => commit("SET_INVEST_LIST",{ invests ,projectStatus, lists:getters.invests.list }))
 }
 
 //红包
-export function FETCH_RED_PACKET_LIST({commit, dispatch, state},{pageNum,pageSize,status}) {
+export function FETCH_RED_PACKET_LIST({commit, state},{pageNum,pageSize,status}) {
     return fetchRedPacket({ commit },{pageNum, pageSize ,status})
         .then( redPacket => commit("SET_RED_PACKET_LIST",{ redPacket , status}))
 }
 
 
-export function TAB_RED_PACKET_LIST({commit, dispatch, state},{pageNum,pageSize,status}){
+export function TAB_RED_PACKET_LIST({commit, state},{pageNum,pageSize,status}){
     
     if(!state.user.redPacket[status]){
         return fetchRedPacket({ commit },{pageNum,pageSize,status})

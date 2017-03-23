@@ -12,3 +12,9 @@ export function SET_PROJECT_LIST(state , { projects , lists}) {
     }
 
 }
+
+export function SET_PROJECT(state, { project }) {
+    if(project.code == '0000'){
+        state.projects.detail = project.data
+    }
+}

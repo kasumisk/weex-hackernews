@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+      <Header :title="title"></Header>
       <!-- 图片使用变量 -->
     <image :src="url + 'images/login-bg.png'" alt="" style="width:750px; height:853px;" resize= "cover"></image>
     <!-- <image src="http://app1.mindai.com/images/login-bg.png" alt="" style="width:750px; height:853px;" resize= "cover"></image> -->
@@ -68,10 +69,14 @@
 
 <script>
 // var apis = require('./common/api');
-
+import Header from '../../components/app-header.vue'
 module.exports = {
+    components: {
+        Header
+    },
     data(){
         return {
+            title:'注册',
             switchOn:false,
             passwordType:'password',
             username:'',
@@ -104,7 +109,7 @@ module.exports = {
 
 .bg-inner{
   position:absolute;
-  top:0;
+  top:120px;
   left:0;
   width: 750px;
 }

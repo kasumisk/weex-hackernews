@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Header :title="title"></Header>
         <div class="count flex-row">
             <div class="flex-1">
                 <text class="main-sub-text text-center">未使用</text>
@@ -70,10 +71,14 @@
 
 <script>
     import {mapGetters, mapActions} from 'vuex'
-
+    import Header from '../../components/app-header.vue'
     module.exports = {
+        components: {
+            Header
+        },
         data(){
             return {
+                title:'我的红包',
                 refresh_display:'hide',
                 loading_display:'hide',
                 projectStatus: 0
@@ -143,7 +148,7 @@
         }
     };
 </script>
-
+<style src="../../style/base.css"></style>
 <style lang="css" scoped="">
     .count{
         padding-top: 60px;

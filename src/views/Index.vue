@@ -10,7 +10,7 @@
                 <image src="http://120.25.77.23:3131/mz/images/cunguan.png" resize="cover" class="sub-banner" style="width:750px; height:220px;"></image>
             </div>
             <div class="cell" v-for="item in projects.list" :key="item.id" append="tree">
-                <div class="item">
+                <div class="item" @click="jump(`/project/${item.projectId}`)">
                     <div class="item-header flex-row">
                         <text class="title flex-1">{{item.projectId}}</text>
                         <text class="status flex-1">{{item.status}}</text>

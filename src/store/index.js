@@ -52,7 +52,8 @@ const store = new Vuex.Store({
             list:[],
             pageNum:1,
             pageSize:10,
-            totalNum:''
+            totalNum:'',
+            detail:{}
         },
         counts: {
             top: 20,
