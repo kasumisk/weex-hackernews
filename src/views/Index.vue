@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <Header :backShow="back" :title="title"></Header>
-        <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }" @loadmore="loadMoreinvests" loadmoreoffset="80">
+        <scroller class="scroller" :style="{ width: '750px', height: (clientHeight - 120) + 'px' }" @loadmore="loadMoreinvests" loadmoreoffset="80">
             <refresh class="refresh-view" :display="refreshing ? 'show' : 'hide'" @refresh="fetchInvest">
                 <text v-if="(!refreshing)">↓ pull to refresh</text>
                 <loading-indicator class="indicator"></loading-indicator>

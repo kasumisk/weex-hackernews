@@ -8,7 +8,7 @@
     </div> -->
     <Header :backShow="back" :title="title"></Header>
     <div class="login" v-if="!loading">
-        <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }">
+        <scroller class="scroller" :style="{ width: '750px', height: (clientHeight - 120) + 'px' }">
             <refresh class="refresh-view" :display="refreshing ? 'show' : 'hide'" @refresh="fetchAccount(true,sessionId)">
                 <text v-if="(!refreshing)">↓ pull to refresh</text>
                 <loading-indicator class="indicator"></loading-indicator>
