@@ -6,6 +6,7 @@
             <text>前往登录</text>
         </a>
     </div> -->
+    <Header :backShow="back" :title="title"></Header>
     <div class="login" v-if="!loading">
         <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }">
             <refresh class="refresh-view" :display="refreshing ? 'show' : 'hide'" @refresh="fetchAccount(true,sessionId)">
@@ -61,7 +62,7 @@
                                 <text class="btn-sub">充值</text>
                             </div>
                             <div class="line"></div>
-                            <div class="flex-1" @click="jump('/cach')">
+                            <div class="flex-1" @click="jump('/cash')">
                                 <text class="btn-sub">提现</text>
                             </div>
                         </div>
@@ -151,16 +152,20 @@
     mapGetters,
     mapActions
 } from 'vuex'
+import Header from '../components/app-header.vue'
 import AppTabBar from '../components/app-tabbar.vue'
 import util from '../util/util.js'
  var modal = weex.requireModule('modal')
 
   export default {
     components: {
-        AppTabBar
+        AppTabBar,
+        Header
     },
     data() {
         return {
+            title:'账户',
+            back:false,
             default: 0,
             refreshing:false,
             sessionId:''

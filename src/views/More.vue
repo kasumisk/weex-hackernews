@@ -1,5 +1,6 @@
 <template>
 <div class="container">
+    <Header :backShow="back" :title="title"></Header>
     <div class="cell-access justify-space" style="padding-right:10px;">
         <div class="cell-grow mr25">
             <image src="http://192.168.2.113:1337/dist/images/more1.png" class="icon" resize="contain"></image>
@@ -96,14 +97,21 @@
 <script>
 // var apis = require('./common/api');
 import jumpWeb from '../components/jump-web.vue'
+import Header from '../components/app-header.vue'
 import AppTabBar from '../components/app-tabbar.vue'
 module.exports = {
-    components:{AppTabBar,jumpWeb},
+    components:{AppTabBar,jumpWeb,Header},
     props: {
         lists: {
             default: function() {
                 return [];
             }
+        }
+    },
+    data() {
+        return {
+            title:'更多',
+            back:false
         }
     },
     created: function() {

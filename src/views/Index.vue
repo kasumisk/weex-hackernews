@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Header :backShow="back" :title="title"></Header>
         <scroller class="scroller" :style="{ width: '750px', height: clientHeight + 'px' }" @loadmore="loadMoreinvests" loadmoreoffset="80">
             <refresh class="refresh-view" :display="refreshing ? 'show' : 'hide'" @refresh="fetchInvest">
                 <text v-if="(!refreshing)">↓ pull to refresh</text>
@@ -54,15 +55,18 @@ import {
     mapGetters,
     mapActions
 } from 'vuex'
-
+import Header from '../components/app-header.vue'
 import AppTabBar from '../components/app-tabbar.vue'
 import config from '../util/config.js'
 module.exports = {
     components: {
-        AppTabBar
+        AppTabBar,
+        Header
     },
     data() {
         return {
+            title:'首页',
+            back:false,
             refreshing: false,
             loading_display: 'hide'
         }

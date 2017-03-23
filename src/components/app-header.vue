@@ -1,70 +1,60 @@
 <template>
-  <div class="header">
-    <div class="logo" @click="jump('/')">
-      <image class="image" src="https://news.ycombinator.com/favicon.ico"></image>
+  <div class="flex-row app-header">
+    <div class="back" @click="back" v-if="backShow">
+      <image class="back" src="http://192.168.2.113:1337/dist/images/leftArrow.png"  resize="contain"></image>
     </div>
-    <div class="nav">
-      <div class="link" @click="jump('/top')">
-        <text class="title">Top</text>
-      </div>
-      <div class="link" @click="jump('/new')">
-        <text class="title">New</text>
-      </div>
-      <div class="link" @click="jump('/show')">
-        <text class="title">Show</text>
-      </div>
-      <div class="link" @click="jump('/ask')">
-        <text class="title">Ask</text>
-      </div>
-      <div class="link" @click="jump('/job')">
-        <text class="title">Job</text>
-      </div>
+    <div class="flex-1">
+      <text class="title">{{title}}</text>
     </div>
   </div>
 </template>
 
-<style scoped>
-  .header {
-    position: relative;
-    height: 120px;
-    margin-bottom: 3px;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-    border-bottom-color: #DDDDDD;
-    background-color: #FF6600;
+<script>
+  export default {
+    props: {
+      title: {
+        type: String,
+        default: ''
+      },
+      backShow:{
+        type:Boolean,
+        default:true
+      }
+    },
+    created () {
+      console.log(this.title)
+    },
+    methods: {
+      back: function () {
+        this.$router.back()
+      }
+    }
   }
-  .logo {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    top: 35px;
-    left: 35px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: #FFFFFF;
-  }
-  .image {
-    width: 44px;
-    height: 44px;
-  }
-  .nav {
-    display: flex;
-    position: absolute;
-    left: 120px;
-    top: 35px;
+</script>
+<!--<style src="../style/base.css"></style>-->
+<style>
+  .flex-row{
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+  }
+  .flex-1{
+    flex: 1;
+  }
+  .app-header{
+    padding-top: 40px;
+    background-color: #32c1d4;
+    height:120px;
     align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
   }
-  .link {
-    padding-left: 15px;
-    padding-right: 15px;
+  .back{
+    width: 40px;
+    height:40px;
   }
-  .title {
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 32px;
-    line-height: 44px;
-    color: #FFFFFF;
+  .title{
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
   }
+
 </style>

@@ -9,9 +9,9 @@ let config =  {
         var clientHeight;
         // open a new window (tab) on the web
         if (env.platform === 'Web') {
-              clientHeight = weex.config.env.deviceHeight - 100
+              clientHeight = weex.config.env.deviceHeight - 96
           }else {
-              clientHeight = weex.config.env.deviceHeight - 228
+              clientHeight = weex.config.env.deviceHeight - 100
           }
           return clientHeight;
 
